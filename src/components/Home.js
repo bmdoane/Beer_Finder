@@ -5,15 +5,15 @@ class Home extends Component {
   state = {
     searchName: {
       search: '',
-      exists: false,
+      valid: false,
     },
     searchCity: {
       search: '',
-      exists: false,
+      valid: false,
     },
     searchState: {
       search: '',
-      exists: false,
+      valid: false,
     },
     searchTerms: [],
     alert: 'Please add search term to at least one field above.'
@@ -23,18 +23,44 @@ class Home extends Component {
     const inputValue = e.target.value
     const term = e.target.name
     inputValue.length > 0
-      ? this.setState(prevState => ({
+      ? this.setState(() => ({
         [term]: {
           search: inputValue,
-          exists: true
+          valid: true
         }
       }))
-      : this.setState(prevState => ({
+      : this.setState(() => ({
         [term]: {
           search: inputValue,
-          exists: false
+          valid: false
         }
       }))
+  }
+
+  sortTerm = (term) => {
+    console.log('this fired', term)
+    const { searchName, searchCity, searchState } = this.state
+    if ((term === searchName) && (term.valid === true)) {
+      return `by_name=${searchName.search}`
+    } else if ((term === searchCity) && (term.valid === true)) {
+      return `by_city=${searchCity.search}`
+    } else if ((term === searchState) && (term.valid === true)) {
+      return `by_state=${searchState.search}`
+    } else {
+      return ''
+    }
+  }
+
+  addTerms = (term1, term2, term3) => {
+    this.setState(prevState => ({
+      searchTerms: [this.sortTerm(term1), this.sortTerm(term2), this.sortTerm(term3), ...prevState.searchTerms]
+    }))
+  }
+
+  shorten = () => {
+    this.setState(prevState => ({
+      searchTerms: prevState.searchTerms.filter(term => term !== '')
+    }))
   }
 
   handleSubmit = (e) => {
@@ -43,6 +69,8 @@ class Home extends Component {
     if (searchName.search === '' && searchCity.search === '' && searchState.search === '') {
       console.log('alert', alert)
     }
+    this.addTerms(searchName, searchCity, searchState)
+    this.shorten()
   }
 
 
