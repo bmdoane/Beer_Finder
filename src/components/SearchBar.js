@@ -2,7 +2,7 @@ import React from 'react'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 
-function SearchBar ({ handleTerms, handleSubmit, searchName, searchCity, searchState }) {
+function SearchBar ({ handleTerms, handleSubmit, searchName, searchCity, searchState, searchMade }) {
   return (
     <div className='container search'>
       <Form>
@@ -36,7 +36,12 @@ function SearchBar ({ handleTerms, handleSubmit, searchName, searchCity, searchS
             value={searchState.search}
           />
         </Form.Group>
-        <Button variant="outline-primary" type="submit" onClick={(e) => handleSubmit(e)}>
+        <Button
+          variant="outline-primary"
+          type="submit"
+          onClick={(e) => handleSubmit(e)}
+          disabled={searchMade}
+        >
           Stumble on!
         </Button>
       </Form>

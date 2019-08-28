@@ -1,5 +1,11 @@
 import React, { Component } from 'react'
+import {
+  getByOneTerm,
+  getByTwoTerms,
+  getByThreeTerms
+} from '../utils/api'
 import SearchBar from './SearchBar'
+import SearchList from './SearchList'
 
 class Home extends Component {
   state = {
@@ -15,8 +21,10 @@ class Home extends Component {
       search: '',
       valid: false,
     },
+    searchMade: false,
     searchTerms: [],
-    alert: 'Please add search term to at least one field above.'
+    alert: 'Please add search term to at least one field above.',
+    breweries: [],
   }
 
   handleTerms = (e) => {
@@ -57,26 +65,57 @@ class Home extends Component {
     }))
   }
 
-  shorten = () => {
+  trimEmptyTerms = () => {
     this.setState(prevState => ({
       searchTerms: prevState.searchTerms.filter(term => term !== '')
-    }))
+    }), () => { this.returnBeer() })
+  }
+
+  returnBeer = () => {
+    const { searchTerms } = this.state
+    console.log('searchTerms', searchTerms)
+    if (searchTerms.length === 1) {
+      getByOneTerm(searchTerms[0])
+        .then((data) => {
+          this.setState({
+            breweries: data,
+            searchMade: true,
+          })
+        })
+    } else if (searchTerms.length === 2) {
+      getByTwoTerms(searchTerms[0], searchTerms[1])
+        .then((data) => {
+          this.setState({
+            breweries: data,
+            searchMade: true,
+          })
+        })
+    } else if (searchTerms.length === 3) {
+      getByThreeTerms(searchTerms[0], searchTerms[1], searchTerms[2])
+        .then((data) => {
+          this.setState({
+            breweries: data,
+            searchMade: true,
+          })
+        })
+    }
   }
 
   handleSubmit = (e) => {
     e.preventDefault()
+    console.log('this', this)
     const { searchName, searchCity, searchState, alert } = this.state
     if (searchName.search === '' && searchCity.search === '' && searchState.search === '') {
       console.log('alert', alert)
     }
     this.addTerms(searchName, searchCity, searchState)
-    this.shorten()
+    this.trimEmptyTerms()
   }
 
 
   render() {
     console.log('this.state', this.state)
-    const { searchName, searchCity, searchState } = this.state
+    const { searchName, searchCity, searchState, searchMade, breweries } = this.state
 
     return (
       <div>
@@ -86,7 +125,9 @@ class Home extends Component {
           searchName={searchName}
           searchCity={searchCity}
           searchState={searchState}
+          searchMade={searchMade}
         />
+        <SearchList breweries={breweries} />
       </div>
     )
   }

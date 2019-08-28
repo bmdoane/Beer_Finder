@@ -19,6 +19,7 @@ body {
 
 .navbar {
   padding: 20px 0;
+  text-align: center;
 }
 
 .search {
@@ -29,4 +30,13 @@ body {
   border: 1px solid rgb(0, 123, 255);
   border-radius: 5px;
   height: 38px;
+}
+
+.list {
+  padding: 20px 0;
+}
+
+ul {
+  padding: 0 20px;
+  margin: 0 auto;
 }
