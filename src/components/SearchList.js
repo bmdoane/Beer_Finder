@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom'
 
 export default function SearchList({ breweries }) {
   return (
@@ -8,8 +8,18 @@ export default function SearchList({ breweries }) {
         {breweries.map((brew) => {
           const { name, city, state, id } = brew
           return (
-            <li key={id} style={{ listStyleType: 'none', padding: '3px 0' }}>
-              {`🍺 ${name}, ${city}, ${state}`}
+            <li
+              key={id}
+              className='nameList'
+            >
+              <Link to={{
+                pathname: '/brewery',
+                state: {
+                  brewery: brew
+                }
+              }}>
+                {`🍺 ${name}, ${city}, ${state}`}
+              </Link>
             </li>
           )
         })}

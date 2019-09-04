@@ -77,6 +77,7 @@ class Home extends Component {
     if (searchTerms.length === 1) {
       getByOneTerm(searchTerms[0])
         .then((data) => {
+          console.log('data', data)
           this.setState({
             breweries: data,
             searchMade: true,
@@ -106,6 +107,7 @@ class Home extends Component {
     console.log('this', this)
     const { searchName, searchCity, searchState, alert } = this.state
     if (searchName.search === '' && searchCity.search === '' && searchState.search === '') {
+      // Need a solution to wrap this up
       console.log('alert', alert)
     }
     this.addTerms(searchName, searchCity, searchState)

@@ -40,3 +40,8 @@ ul {
   padding: 0 20px;
   margin: 0 auto;
 }
+
+.nameList {
+  list-style-type: none;
+  padding: 3px 0;
+}
