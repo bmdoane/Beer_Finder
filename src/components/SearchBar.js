@@ -37,8 +37,8 @@ function SearchBar ({ handleTerms, handleSubmit, searchName, searchCity, searchS
           />
         </Form.Group>
         <Button
-          variant="outline-primary"
-          type="submit"
+          variant='outline-primary'
+          type='submit'
           onClick={(e) => handleSubmit(e)}
           disabled={searchMade}
         >

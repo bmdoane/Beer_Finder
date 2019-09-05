@@ -46,7 +46,6 @@ class Home extends Component {
   }
 
   sortTerm = (term) => {
-    console.log('this fired', term)
     const { searchName, searchCity, searchState } = this.state
     if ((term === searchName) && (term.valid === true)) {
       return `by_name=${searchName.search}`
@@ -120,17 +119,21 @@ class Home extends Component {
     const { searchName, searchCity, searchState, searchMade, breweries } = this.state
 
     return (
-      <div>
+      <React.Fragment>
         <SearchBar
           handleTerms={this.handleTerms}
           handleSubmit={this.handleSubmit}
           searchName={searchName}
           searchCity={searchCity}
           searchState={searchState}
+          breweries={breweries}
           searchMade={searchMade}
         />
-        <SearchList breweries={breweries} />
-      </div>
+        <SearchList
+          breweries={breweries}
+          searchMade={searchMade}
+        />
+      </React.Fragment>
     )
   }
 }
