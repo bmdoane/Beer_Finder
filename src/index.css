@@ -9,6 +9,10 @@ body {
   font-size: 16px;
 }
 
+.tac {
+  text-align: center;
+}
+
 .container {
   display: flex;
   justify-content: center;
@@ -34,6 +38,7 @@ body {
 
 .list {
   padding: 20px 0;
+  max-width: 450px;
 }
 
 ul {
