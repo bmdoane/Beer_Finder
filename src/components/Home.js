@@ -6,6 +6,7 @@ import {
 } from '../utils/api'
 import SearchBar from './SearchBar'
 import SearchList from './SearchList'
+import Alert from './Alert'
 
 class Home extends Component {
   state = {
@@ -23,7 +24,10 @@ class Home extends Component {
     },
     searchMade: false,
     searchTerms: [],
-    alert: 'Please add search term to at least one field above.',
+    alert: {
+      msg: 'Please add at least one search term to fields above.',
+      status: false,
+    },
     breweries: [],
   }
 
@@ -31,10 +35,14 @@ class Home extends Component {
     const inputValue = e.target.value
     const term = e.target.name
     inputValue.length > 0
-      ? this.setState(() => ({
+      ? this.setState((prevState) => ({
         [term]: {
           search: inputValue,
           valid: true
+        },
+        alert: {
+          ...prevState.alert,
+          status: false
         }
       }))
       : this.setState(() => ({
@@ -70,13 +78,20 @@ class Home extends Component {
     }), () => { this.returnBeer() })
   }
 
+  noTerms = (name, city, state) => {
+    if (name.search === '' && city.search === '' && state.search === '') {
+      this.setState({...this.state, alert: {
+        ...this.state.alert,
+        status: true
+      }})
+    }
+  }
+
   returnBeer = () => {
     const { searchTerms } = this.state
-    console.log('searchTerms', searchTerms)
     if (searchTerms.length === 1) {
       getByOneTerm(searchTerms[0])
         .then((data) => {
-          console.log('data', data)
           this.setState({
             breweries: data,
             searchMade: true,
@@ -104,19 +119,15 @@ class Home extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
     console.log('this', this)
-    const { searchName, searchCity, searchState, alert } = this.state
-    if (searchName.search === '' && searchCity.search === '' && searchState.search === '') {
-      // Need a solution to wrap this up
-      console.log('alert', alert)
-    }
+    const { searchName, searchCity, searchState } = this.state
+    this.noTerms(searchName, searchCity, searchState)
     this.addTerms(searchName, searchCity, searchState)
     this.trimEmptyTerms()
   }
 
-
   render() {
     console.log('this.state', this.state)
-    const { searchName, searchCity, searchState, searchMade, breweries } = this.state
+    const { searchName, searchCity, searchState, searchMade, breweries, alert } = this.state
 
     return (
       <React.Fragment>
@@ -129,6 +140,7 @@ class Home extends Component {
           breweries={breweries}
           searchMade={searchMade}
         />
+        {alert.status === true ? <Alert alert={alert} /> : null}
         <SearchList
           breweries={breweries}
           searchMade={searchMade}
