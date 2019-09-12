@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
-import map from '../images/map.png'
+import GoogleMapsContainer from './Map'
 
 function phoneFormat(num) {
   num = num.replace(/[^\d]/g, "");
@@ -13,21 +13,20 @@ function phoneFormat(num) {
 }
 
 export default class Breweries extends Component {
-
   render() {
     const { brewery } = this.props.location.state
     return (
       <div className='container'>
-        <Card bg="light" border="secondary">
+        <Card bg="light" border="secondary" style={{ width: '340px' }}>
           <Card.Header className='text-center' as='h3'>{brewery.name}</Card.Header>
           <Card.Body>
-            <Card.Text style={{margin: 0}}>
+            <Card.Text style={{ margin: 0 }}>
               {brewery.street}
             </Card.Text>
             <Card.Text style={{ margin: 0 }}>
               {`${brewery.city}, ${brewery.state}`}
             </Card.Text>
-            <Card.Text style={{ margin: '0 0 20 0'}}>
+            <Card.Text style={{ margin: '0 0 20 0' }}>
               {brewery.postal_code}
             </Card.Text>
             <Card.Text style={{ margin: 0 }}>
@@ -36,20 +35,21 @@ export default class Breweries extends Component {
             <Card.Text style={{ margin: '0 0 20 0' }}>
               <a style={{ color: 'inherit', fontWeight: 'bold' }} href={brewery.website_url}>{brewery.website_url}</a>
             </Card.Text>
-            <Card.Text className='text-center' style={{ margin: '0 auto 0 auto' }}>
-              <img alt='brewery map' src={map} href='' />
-            </Card.Text>
+            <div className='text-center' style={{ width: '300px', height: '300px', margin: '0 auto' }}>
+              <GoogleMapsContainer brewery={brewery} />
+            </div>
+            <div style={{ textAlign: 'center', padding: '20px' }}>
+              <Link to='/'>
+                <Button
+                  variant="secondary"
+                  block
+                  onClick={() => { console.log('this fired')}}
+                >
+                  Keep fishing
+                </Button>
+              </Link>
+            </div>
           </Card.Body>
-          <div style={{ textAlign: 'center', padding: '0 20px 20px 20px'}}>
-            <Link to='/'>
-              <Button
-                variant="secondary"
-                block
-              >
-                Keep fishing
-              </Button>
-            </Link>
-          </div>
         </Card>
       </div>
     )
