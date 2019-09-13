@@ -12,7 +12,7 @@ function phoneFormat(num) {
   return num
 }
 
-export default class Breweries extends Component {
+class Breweries extends Component {
   render() {
     const { brewery } = this.props.location.state
     return (
@@ -38,7 +38,7 @@ export default class Breweries extends Component {
             <div className='text-center' style={{ width: '300px', height: '300px', margin: '0 auto' }}>
               <GoogleMapsContainer brewery={brewery} />
             </div>
-            <div style={{ textAlign: 'center', padding: '20px' }}>
+            <div style={{ textAlign: 'center', padding: '20px 0 0 0' }}>
               <Link to='/'>
                 <Button
                   variant="secondary"
@@ -55,3 +55,5 @@ export default class Breweries extends Component {
     )
   }
 }
+
+export default Breweries
