@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Alert({ alert }) {
+function Alert({ alert }) {
   const { msg } = alert
 
   return (
@@ -9,3 +9,5 @@ export default function Alert({ alert }) {
     </div>
   )
 }
+
+export default Alert

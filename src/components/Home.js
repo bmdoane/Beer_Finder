@@ -8,7 +8,7 @@ import SearchBar from './SearchBar'
 import SearchList from './SearchList'
 import Alert from './Alert'
 
-export default class Home extends Component {
+class Home extends Component {
   state = {
     searchName: {
       search: '',
@@ -149,3 +149,5 @@ export default class Home extends Component {
     )
   }
 }
+
+export default Home

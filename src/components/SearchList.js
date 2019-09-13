@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 // import Button from 'react-bootstrap/Button'
 
-export default function SearchList({ breweries, searchMade }) {
+function SearchList({ breweries, searchMade }) {
   return (
     <div className='container list'>
       { (breweries.length === 0 && searchMade === true)
@@ -33,3 +33,5 @@ export default function SearchList({ breweries, searchMade }) {
     </div>
   )
 }
+
+export default SearchList
