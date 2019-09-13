@@ -2,7 +2,7 @@ import React from 'react'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 
-function SearchBar ({ handleTerms, handleSubmit, searchName, searchCity, searchState, searchMade }) {
+export default function SearchBar ({ handleTerms, handleSubmit, searchName, searchCity, searchState, searchMade }) {
   return (
     <div className='container search'>
       <Form>
@@ -48,5 +48,3 @@ function SearchBar ({ handleTerms, handleSubmit, searchName, searchCity, searchS
     </div>
   )
 }
-
-export default SearchBar

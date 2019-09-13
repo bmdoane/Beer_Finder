@@ -8,7 +8,7 @@ import Navbar from './Navbar'
 import Home from './Home'
 import Brewery from './Brewery'
 
-class App extends Component {
+export default class App extends Component {
   render() {
     return (
       <Router>
@@ -24,5 +24,3 @@ class App extends Component {
     )
   }
 }
-
-export default App

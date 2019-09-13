@@ -38,7 +38,7 @@ export default class Breweries extends Component {
             <div className='text-center' style={{ width: '300px', height: '300px', margin: '0 auto' }}>
               <GoogleMapsContainer brewery={brewery} />
             </div>
-            <div style={{ textAlign: 'center', padding: '20px' }}>
+            <div style={{ textAlign: 'center', padding: '20px 20px 0 20px' }}>
               <Link to='/'>
                 <Button
                   variant="secondary"
