@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import States from 'datasets-us-states-abbr-names'
 import {
   getByOneTerm,
   getByTwoTerms,
@@ -31,7 +32,12 @@ class Home extends Component {
     breweries: [],
   }
 
+  componentDidUpdate() {
+
+  }
+
   handleTerms = (e) => {
+    console.log('e', e)
     const inputValue = e.target.value
     const term = e.target.name
     inputValue.length > 0
@@ -66,18 +72,6 @@ class Home extends Component {
     }
   }
 
-  addTerms = (term1, term2, term3) => {
-    this.setState(prevState => ({
-      searchTerms: [this.sortTerm(term1), this.sortTerm(term2), this.sortTerm(term3), ...prevState.searchTerms]
-    }))
-  }
-
-  trimEmptyTerms = () => {
-    this.setState(prevState => ({
-      searchTerms: prevState.searchTerms.filter(term => term !== '')
-    }), () => { this.returnBeer() })
-  }
-
   noTerms = (name, city, state) => {
     if (name.search === '' && city.search === '' && state.search === '') {
       this.setState({...this.state, alert: {
@@ -87,11 +81,38 @@ class Home extends Component {
     }
   }
 
+  stateAbbreviation = (stateTerm) => {
+    if (stateTerm.length === 2) {
+      this.setState(prevState => ({
+        searchState: {
+          ...prevState.searchState,
+          search: States[stateTerm.toUpperCase()]
+        }
+      }), () => this.addTerms(this.state.searchName, this.state.searchCity, this.state.searchState))
+    } else {
+      this.addTerms(this.state.searchName, this.state.searchCity, this.state.searchState)
+    }
+  }
+
+  addTerms = (term1, term2, term3) => {
+    this.setState(prevState => ({
+      searchTerms: [this.sortTerm(term1), this.sortTerm(term2), this.sortTerm(term3), ...prevState.searchTerms]
+    }), () => this.trimEmptyTerms())
+  }
+
+  trimEmptyTerms = () => {
+    this.setState(prevState => ({
+      searchTerms: prevState.searchTerms.filter(term => term !== '')
+    }), () => this.returnBeer())
+  }
+
   returnBeer = () => {
     const { searchTerms } = this.state
+    console.log('searchTerms', searchTerms)
     if (searchTerms.length === 1) {
       getByOneTerm(searchTerms[0])
         .then((data) => {
+          console.log('data', data)
           this.setState({
             breweries: data,
             searchMade: true,
@@ -100,6 +121,7 @@ class Home extends Component {
     } else if (searchTerms.length === 2) {
       getByTwoTerms(searchTerms[0], searchTerms[1])
         .then((data) => {
+          console.log('data', data)
           this.setState({
             breweries: data,
             searchMade: true,
@@ -118,11 +140,9 @@ class Home extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    console.log('this', this)
     const { searchName, searchCity, searchState } = this.state
+    this.stateAbbreviation(searchState.search)
     this.noTerms(searchName, searchCity, searchState)
-    this.addTerms(searchName, searchCity, searchState)
-    this.trimEmptyTerms()
   }
 
   render() {
