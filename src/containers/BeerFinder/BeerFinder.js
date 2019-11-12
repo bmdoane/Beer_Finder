@@ -8,8 +8,14 @@ import {
 import SearchBar from '../../components/SearchBar'
 import SearchList from '../../components/SearchList'
 import Alert from '../../components/Alert'
+import styled from "styled-components";
 
-class Home extends Component {
+const Container = styled.div`
+  max-width: 450px;
+  margin: 0 auto;
+`
+
+class BeerFinder extends Component {
   state = {
     searchName: {
       search: '',
@@ -146,7 +152,7 @@ class Home extends Component {
     const { searchName, searchCity, searchState, searchMade, breweries, alert } = this.state
 
     return (
-      <>
+      <Container>
         <SearchBar
           handleTerms={this.handleTerms}
           handleSubmit={this.handleSubmit}
@@ -161,9 +167,9 @@ class Home extends Component {
           breweries={breweries}
           searchMade={searchMade}
         />
-      </>
+      </Container>
     )
   }
 }
 
-export default Home
+export default BeerFinder

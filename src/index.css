@@ -36,17 +36,3 @@ body {
   height: 38px;
 }
 
-.list {
-  padding: 20px 0;
-  max-width: 450px;
-}
-
-ul {
-  padding: 0 20px;
-  margin: 0 auto;
-}
-
-.nameList {
-  list-style-type: none;
-  padding: 3px 0;
-}

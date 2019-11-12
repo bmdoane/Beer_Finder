@@ -3,6 +3,11 @@ import { Link } from 'react-router-dom'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import GoogleMapsContainer from '../../components/Map'
+import styled from "styled-components";
+
+const Container = styled.div`
+  margin: 0 auto;
+`;
 
 function phoneFormat(num) {
   num = num.replace(/[^\d]/g, "");
@@ -16,7 +21,8 @@ class Breweries extends Component {
   render() {
     const { brewery } = this.props.location.state
     return (
-      <div className='container'>
+      <Container>
+
         <Card bg="light" border="secondary" style={{ width: '340px' }}>
           <Card.Header className='text-center' as='h3'>{brewery.name}</Card.Header>
           <Card.Body>
@@ -51,7 +57,8 @@ class Breweries extends Component {
             </div>
           </Card.Body>
         </Card>
-      </div>
+        
+      </Container>
     )
   }
 }

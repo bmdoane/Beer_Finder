@@ -1,10 +1,16 @@
 import React from 'react'
+import styled from "styled-components";
+
+const NavContainer = styled.div`
+  padding: 20px 0;
+  text-align: center;
+`
 
 function Navbar() {
   return (
-    <div className='container navbar'>
+    <NavContainer>
       <h3>Where are the watering holes???</h3>
-    </div>
+    </NavContainer>
   )
 }
 
