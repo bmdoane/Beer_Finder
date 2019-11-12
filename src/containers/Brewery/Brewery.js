@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
-import GoogleMapsContainer from './Map'
+import GoogleMapsContainer from '../../components/Map'
 
 function phoneFormat(num) {
   num = num.replace(/[^\d]/g, "");

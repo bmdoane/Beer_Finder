@@ -4,10 +4,10 @@ import {
   getByOneTerm,
   getByTwoTerms,
   getByThreeTerms
-} from '../utils/api'
-import SearchBar from './SearchBar'
-import SearchList from './SearchList'
-import Alert from './Alert'
+} from '../../utils/api'
+import SearchBar from '../../components/SearchBar'
+import SearchList from '../../components/SearchList'
+import Alert from '../../components/Alert'
 
 class Home extends Component {
   state = {
@@ -30,10 +30,6 @@ class Home extends Component {
       status: false,
     },
     breweries: [],
-  }
-
-  componentDidUpdate() {
-
   }
 
   handleTerms = (e) => {
@@ -150,7 +146,7 @@ class Home extends Component {
     const { searchName, searchCity, searchState, searchMade, breweries, alert } = this.state
 
     return (
-      <React.Fragment>
+      <>
         <SearchBar
           handleTerms={this.handleTerms}
           handleSubmit={this.handleSubmit}
@@ -165,7 +161,7 @@ class Home extends Component {
           breweries={breweries}
           searchMade={searchMade}
         />
-      </React.Fragment>
+      </>
     )
   }
 }
