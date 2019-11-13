@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react'
+import styled from "styled-components";
 
-const mapStyles = {
+const GoogleMap = styled(Map)`
   position: 'absolute',
-  width: '300px',
-  height: '300px',
+  max-width: '280px',
+  max-height: '280px',
   textAlign: 'center'
-}
+`
+
 
 class GoogleMapsContainer extends Component {
   render() {
@@ -15,11 +17,10 @@ class GoogleMapsContainer extends Component {
       return <div>Loading...</div>
     }
     return (
-      <Map
+      <GoogleMap
         google={this.props.google}
         zoom={15}
-        style={mapStyles}
-        containerStyle={{ width: '300px', height: '300px' }}
+        containerStyle={{ maxWidth: '280px', maxHeight: '280px' }}
         initialCenter={{
           lat: latitude,
           lng: longitude
@@ -29,7 +30,7 @@ class GoogleMapsContainer extends Component {
           name={name}
           position={{ lat: latitude, lng: longitude }}
         />
-      </Map>
+      </GoogleMap>
     )
   }
 }

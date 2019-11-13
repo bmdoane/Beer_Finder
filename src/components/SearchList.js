@@ -1,36 +1,59 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-// import Button from 'react-bootstrap/Button'
+import styled from "styled-components";
+
+const BreweryListContainer = styled.div`
+  padding: 20px 0;
+  max-width: 450px;
+`
+
+const BreweryList = styled.ul`
+  padding: 0 20px;
+  margin: 0 auto;
+
+  & li {
+    list-style-type: none;
+    padding: 3px 0;
+  }
+`
+
+const BreweryLink = styled(Link)`
+  color: #000;
+  font-weight: bold;
+
+  ::before {
+    content: '🍺 ';
+  }
+
+  &:hover {
+    color: red;
+    text-decoration: none;
+  }
+`
 
 function SearchList({ breweries, searchMade }) {
   return (
-    <div className='container list'>
-      { (breweries.length === 0 && searchMade === true)
-        ? <h5 className='tac'>No records were found for this search.  Please check spelling and refine search terms.</h5>
-        : <ul>
-            {breweries.map((brew) => {
-              const { name, city, state, id } = brew
-              return (
-                <li
-                  key={id}
-                  className='nameList'
-                >
-                  <Link
-                    style={{ color: '#000'}}
-                    to={{
-                    pathname: '/brewery',
-                    state: {
-                      brewery: brew
-                    }
-                  }}>
-                    {`🍺 ${name}, ${city}, ${state}`}
-                  </Link>
-                </li>
-              )
-            })}
-          </ul>
-      }
-    </div>
+    <BreweryListContainer>
+      <BreweryList>
+        {breweries.map(brew => {
+          const { name, city, state, id } = brew;
+          return (
+            <li key={id}>
+              <BreweryLink
+                to={{
+                  pathname: "/brewery",
+                  state: {
+                    brewery: brew
+                  }
+                }}
+              >
+                {`${name}, ${city}, ${state}`}
+              </BreweryLink>
+            </li>
+          );
+        })}
+      </BreweryList>
+    </BreweryListContainer>
   )
 }
 

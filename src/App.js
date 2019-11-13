@@ -4,22 +4,20 @@ import {
   Route,
   Switch,
 } from 'react-router-dom'
-import Navbar from './Navbar'
-import Home from './Home'
-import Brewery from './Brewery'
+import Layout from './hoc/Layout'
+import BeerFinder from './containers/BeerFinder/BeerFinder'
+import Brewery from './containers/Brewery/Brewery'
 
 class App extends Component {
   render() {
     return (
       <Router>
-        <div>
-          <Navbar />
-
+        <Layout>
           <Switch>
-            <Route path='/' exact component={Home} />
+            <Route path='/' exact component={BeerFinder} />
             <Route path='/brewery' component={Brewery} />
           </Switch>
-        </div>
+        </Layout>
       </Router>
     )
   }
