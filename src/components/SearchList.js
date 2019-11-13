@@ -7,10 +7,6 @@ const BreweryListContainer = styled.div`
   max-width: 450px;
 `
 
-const SearchHelp = styled.h5`
-  text-align: center;
-`
-
 const BreweryList = styled.ul`
   padding: 0 20px;
   margin: 0 auto;
@@ -36,35 +32,27 @@ const BreweryLink = styled(Link)`
 `
 
 function SearchList({ breweries, searchMade }) {
-  // Need to reset inputs and button when showing SearchHelp
   return (
     <BreweryListContainer>
-      {breweries.length === 0 && searchMade === true ? (
-        <SearchHelp>
-          No records were found for this search. Please check spelling and
-          refine search terms.
-        </SearchHelp>
-      ) : (
-        <BreweryList>
-          {breweries.map(brew => {
-            const { name, city, state, id } = brew;
-            return (
-              <li key={id}>
-                <BreweryLink
-                  to={{
-                    pathname: "/brewery",
-                    state: {
-                      brewery: brew
-                    }
-                  }}
-                >
-                  {`${name}, ${city}, ${state}`}
-                </BreweryLink>
-              </li>
-            );
-          })}
-        </BreweryList>
-      )}
+      <BreweryList>
+        {breweries.map(brew => {
+          const { name, city, state, id } = brew;
+          return (
+            <li key={id}>
+              <BreweryLink
+                to={{
+                  pathname: "/brewery",
+                  state: {
+                    brewery: brew
+                  }
+                }}
+              >
+                {`${name}, ${city}, ${state}`}
+              </BreweryLink>
+            </li>
+          );
+        })}
+      </BreweryList>
     </BreweryListContainer>
   )
 }

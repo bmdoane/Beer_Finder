@@ -7,8 +7,7 @@ import {
 } from '../../utils/api'
 import SearchBar from '../../components/SearchBar'
 import SearchList from '../../components/SearchList'
-import Alert from '../../components/Alert'
-import styled from "styled-components";
+import styled from "styled-components"
 
 const Container = styled.div`
   max-width: 450px;
@@ -32,10 +31,32 @@ class BeerFinder extends Component {
     searchMade: false,
     searchTerms: [],
     alert: {
-      msg: 'Please add at least one search term to fields above.',
-      status: false,
+      addStatus: false,
+      badStatus: false,
     },
     breweries: [],
+  }
+
+  dataCheck = () => {
+      this.setState(prevState => ({
+        searchName: {
+          ...prevState.searchName,
+          valid: false
+        },
+        searchCity: {
+          ...prevState.searchCity,
+          valid: false
+        },
+        searchState: {
+          ...prevState.searchState,
+          valid: false
+        },
+        searchTerms: [],
+        alert: {
+          ...prevState.alert,
+          badStatus: true
+        }
+      }));
   }
 
   handleTerms = (e) => {
@@ -50,7 +71,7 @@ class BeerFinder extends Component {
         },
         alert: {
           ...prevState.alert,
-          status: false
+          addStatus: false
         }
       }))
       : this.setState(() => ({
@@ -78,7 +99,7 @@ class BeerFinder extends Component {
     if (name.search === '' && city.search === '' && state.search === '') {
       this.setState({...this.state, alert: {
         ...this.state.alert,
-        status: true
+        addStatus: true
       }})
     }
   }
@@ -115,27 +136,51 @@ class BeerFinder extends Component {
       getByOneTerm(searchTerms[0])
         .then((data) => {
           console.log('data', data)
-          this.setState({
-            breweries: data,
-            searchMade: true,
-          })
+          if (data.length === 0) {
+            this.dataCheck()
+          } else {
+            this.setState({
+              breweries: data,
+              searchMade: true,
+              alert: {
+                addStatus: false,
+                badStatus: false,
+              },
+            })
+          }
         })
     } else if (searchTerms.length === 2) {
       getByTwoTerms(searchTerms[0], searchTerms[1])
         .then((data) => {
           console.log('data', data)
-          this.setState({
-            breweries: data,
-            searchMade: true,
-          })
+          if (data.length === 0) {
+            this.dataCheck();
+          } else {
+            this.setState({
+              breweries: data,
+              searchMade: true,
+              alert: {
+                addStatus: false,
+                badStatus: false
+              }
+            })
+          }
         })
     } else if (searchTerms.length === 3) {
-      getByThreeTerms(searchTerms[0], searchTerms[1], searchTerms[2])
-        .then((data) => {
-          this.setState({
-            breweries: data,
-            searchMade: true,
-          })
+      getByThreeTerms(searchTerms[0], searchTerms[1], searchTerms[2]).then(
+        data => {
+          if (data.length === 0) {
+            this.dataCheck();
+          } else {
+            this.setState({
+              breweries: data,
+              searchMade: true,
+              alert: {
+                addStatus: false,
+                badStatus: false
+              }
+            })
+          }
         })
     }
   }
@@ -161,8 +206,8 @@ class BeerFinder extends Component {
           searchState={searchState}
           breweries={breweries}
           searchMade={searchMade}
+          alert={alert}
         />
-        {alert.status === true ? <Alert alert={alert} /> : null}
         <SearchList
           breweries={breweries}
           searchMade={searchMade}
