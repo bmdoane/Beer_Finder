@@ -6,7 +6,7 @@ const NavContainer = styled.div`
   text-align: center;
 `
 
-function Navbar() {
+const Navbar = () => {
   return (
     <NavContainer>
       <h3>Where are the watering holes???</h3>

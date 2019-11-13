@@ -9,17 +9,5 @@ body {
   font-size: 16px;
 }
 
-.tac {
-  text-align: center;
-}
 
-.search {
-  padding: 0;
-}
-
-.search-input {
-  border: 1px solid rgb(0, 123, 255);
-  border-radius: 5px;
-  height: 38px;
-}
 

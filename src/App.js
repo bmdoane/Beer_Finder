@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom'
 import Layout from './hoc/Layout'
 import BeerFinder from './containers/BeerFinder/BeerFinder'
-import Brewery from './containers/Brewery/Brewery'
+import Brewery from './components/Brewery'
 
 class App extends Component {
   render() {

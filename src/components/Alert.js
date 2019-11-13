@@ -7,7 +7,7 @@ const Container = styled.div`
   text-align: center;
 `
 
-function Alert({ alert }) {
+const Alert = ({ alert }) => {
   const { addStatus, badStatus } = alert
   let alertMsg = null
   if (addStatus) {

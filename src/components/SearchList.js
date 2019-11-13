@@ -31,7 +31,7 @@ const BreweryLink = styled(Link)`
   }
 `
 
-function SearchList({ breweries, searchMade }) {
+const SearchList = ({ breweries, searchMade }) => {
   return (
     <BreweryListContainer>
       <BreweryList>
