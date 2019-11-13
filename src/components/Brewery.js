@@ -9,6 +9,10 @@ const Container = styled.div`
   margin: 0 auto;
 `
 
+const BrewCard = styled(Card)`
+  width: 320px;
+`
+
 const GoogleWrapper = styled.div`
   width: 280px;
   height: 280px;
@@ -36,8 +40,8 @@ const Brewery = (props) => {
     const { brewery } = props.location.state
     return (
       <Container>
-        <Card bg="light" border="secondary" style={{ width: "320px" }}>
-          <Card.Header className="text-center" as="h3">
+        <BrewCard bg="light" border="secondary">
+          <Card.Header as="h3" style={{ textAlign: "center" }}>
             {brewery.name}
           </Card.Header>
           <Card.Body>
@@ -76,9 +80,9 @@ const Brewery = (props) => {
               </Link>
             </BtnWrapper>
           </Card.Body>
-        </Card>
+        </BrewCard>
       </Container>
-    )
+    );
 
 }
 

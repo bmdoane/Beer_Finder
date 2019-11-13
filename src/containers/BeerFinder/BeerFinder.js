@@ -60,7 +60,6 @@ class BeerFinder extends Component {
   }
 
   handleTerms = (e) => {
-    console.log('e', e)
     const inputValue = e.target.value
     const term = e.target.name
     inputValue.length > 0
@@ -135,7 +134,6 @@ class BeerFinder extends Component {
     if (searchTerms.length === 1) {
       getByOneTerm(searchTerms[0])
         .then((data) => {
-          console.log('data', data)
           if (data.length === 0) {
             this.dataCheck()
           } else {
@@ -152,7 +150,6 @@ class BeerFinder extends Component {
     } else if (searchTerms.length === 2) {
       getByTwoTerms(searchTerms[0], searchTerms[1])
         .then((data) => {
-          console.log('data', data)
           if (data.length === 0) {
             this.dataCheck();
           } else {
