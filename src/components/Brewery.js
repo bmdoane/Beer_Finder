@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import Card from 'react-bootstrap/Card'
 import Button from "react-bootstrap/Button";
-import GoogleMapsContainer from '../../components/Map'
+import GoogleMapsContainer from './Map'
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -20,7 +20,7 @@ const BtnWrapper = styled.div`
   padding-top: 20px;
 `
 
-function phoneFormat(num) {
+const phoneFormat = (num) => {
   num = num.replace(/[^\d]/g, "");
   if (num.length === 10) {
     return num.replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3");
@@ -28,13 +28,12 @@ function phoneFormat(num) {
   return num
 }
 
-function urlFormat(url) {
+const urlFormat = (url) => {
   return url.replace(/^(?:https?:\/\/)?(?:www\.)?/i, "");
 }
 
-class Brewery extends Component {
-  render() {
-    const { brewery } = this.props.location.state
+const Brewery = (props) => {
+    const { brewery } = props.location.state
     return (
       <Container>
         <Card bg="light" border="secondary" style={{ width: "320px" }}>
@@ -79,8 +78,8 @@ class Brewery extends Component {
           </Card.Body>
         </Card>
       </Container>
-    );
-  }
+    )
+
 }
 
 export default Brewery

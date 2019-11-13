@@ -19,7 +19,7 @@ const FormButton = styled(Button)`
   width: 100%;
 `
 
-function SearchBar ({ handleTerms, handleSubmit, searchName, searchCity, searchState, searchMade, alert }) {
+const SearchBar = ({ handleTerms, handleSubmit, searchName, searchCity, searchState, searchMade, alert }) => {
   return (
     <Container>
       <Form>

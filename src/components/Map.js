@@ -6,7 +6,7 @@ const GoogleMap = styled(Map)`
   position: 'absolute',
   max-width: '280px',
   max-height: '280px',
-  textAlign: 'center'
+  textAlign: 'center',
 `
 
 
