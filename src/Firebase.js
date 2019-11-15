@@ -5,15 +5,15 @@ import * as firebase from 'firebase'
 
 const settings = { timestampsInSnapshots: true }
 
-const config = {
+const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
-  authDomain: "beerfinder-51329.firebaseapp.com",
-  databaseURL: "https://beerfinder-51329.firebaseio.com",
-  projectId: "beerfinder-51329",
-  storageBucket: "beerfinder-51329.appspot.com",
-  messagingSenderId: "671115368231",
-  appId: "1:671115368231:web:c30e5971f7da00db857b02",
-  measurementId: "G-0BR0E45PXN"
+  authDomain: "beerfinder-251915.firebaseapp.com",
+  databaseURL: "https://beerfinder-251915.firebaseio.com",
+  projectId: "beerfinder-251915",
+  storageBucket: "beerfinder-251915.appspot.com",
+  messagingSenderId: "84958152662",
+  appId: "1:84958152662:web:cd66ee261766f9bcf84677",
+  measurementId: "G-GF0T4RMV0K"
 };
 firebase.initializeApp(config)
 
