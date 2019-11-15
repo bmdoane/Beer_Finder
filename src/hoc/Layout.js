@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Navbar from '../components/Navbar'
+import Navigation from '../components/Navigation'
 import styled from "styled-components";
 
 const MainContainer = styled.div`
@@ -7,20 +7,18 @@ const MainContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   max-width: 1000px;
-  min-width: 280px;
-  margin: 0 auto;
+  min-width: 320px;
+  margin: 20px auto;
 `;
 
 class Layout extends Component {
   render() {
     return (
       <>
-        <MainContainer>
-          <Navbar />
-          {this.props.children}
-        </MainContainer>
+        <Navigation />
+        <MainContainer>{this.props.children}</MainContainer>
       </>
-    )
+    );
   }
 }
 
