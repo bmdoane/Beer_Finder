@@ -7,7 +7,7 @@ import {
 } from '../../utils/api'
 import SearchBar from '../../components/SearchBar'
 import SearchList from '../../components/SearchList'
-import styled from "styled-components"
+import styled from 'styled-components'
 
 const Container = styled.div`
   max-width: 450px;

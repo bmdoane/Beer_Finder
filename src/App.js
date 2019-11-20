@@ -7,6 +7,7 @@ import {
 import Layout from './hoc/Layout'
 import BeerFinder from './containers/BeerFinder/BeerFinder'
 import Brewery from './components/Brewery'
+import User from './containers/User/User'
 
 class App extends Component {
   render() {
@@ -14,12 +15,13 @@ class App extends Component {
       <Router>
         <Layout>
           <Switch>
-            <Route path='/' exact component={BeerFinder} />
-            <Route path='/brewery' component={Brewery} />
+            <Route path="/" exact component={BeerFinder} />
+            <Route path="/brewery" component={Brewery} />
+            <Route path="/user" component={User} />
           </Switch>
         </Layout>
       </Router>
-    )
+    );
   }
 }
 

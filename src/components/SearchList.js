@@ -1,6 +1,7 @@
 import React from 'react'
+import States from "datasets-us-states-abbr-names";
 import { Link } from 'react-router-dom'
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const BreweryListContainer = styled.div`
   padding: 20px 0;
@@ -31,12 +32,16 @@ const BreweryLink = styled(Link)`
   }
 `
 
+const abbrState = brewState => {
+  return Object.keys(States).find(key => States[key] === brewState)
+}
+
 const SearchList = ({ breweries, searchMade }) => {
   return (
     <BreweryListContainer>
       <BreweryList>
         {breweries.map(brew => {
-          const { name, city, state, id } = brew;
+          const { name, city, state, id } = brew
           return (
             <li key={id}>
               <BreweryLink
@@ -47,7 +52,7 @@ const SearchList = ({ breweries, searchMade }) => {
                   }
                 }}
               >
-                {`${name}, ${city}, ${state}`}
+                {name} - {city}, {abbrState(state)}
               </BreweryLink>
             </li>
           );

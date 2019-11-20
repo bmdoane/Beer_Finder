@@ -7,7 +7,13 @@ import styled from 'styled-components'
 const Container = styled.div`
   width: 280px;
   margin: 0 auto;
-`;
+`
+
+const Headline = styled.h3`
+  text-align: center;
+  padding: 10px 0;
+  margin-bottom: 14px;
+`
 
 const FormLabel = styled(Form.Label)`
   :not(:first-child) {
@@ -22,9 +28,10 @@ const FormButton = styled(Button)`
 const SearchBar = ({ handleTerms, handleSubmit, searchName, searchCity, searchState, searchMade, alert }) => {
   return (
     <Container>
+      <Headline>Find a watering hole...</Headline>
       <Form>
         <Form.Group>
-          <FormLabel>Search by brewery name</FormLabel>
+          <FormLabel>Search brewery by name</FormLabel>
           <Form.Control
             autoFocus
             type="text"
