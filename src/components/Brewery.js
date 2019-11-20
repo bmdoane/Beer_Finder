@@ -1,9 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Card from 'react-bootstrap/Card'
-import Button from "react-bootstrap/Button";
+import Button from 'react-bootstrap/Button'
 import GoogleMapsContainer from './Map'
-import styled from "styled-components";
+import styled from 'styled-components'
+import db from '../Firebase'
 
 const Container = styled.div`
   margin: 0 auto;
@@ -27,17 +28,43 @@ const BtnWrapper = styled.div`
 const phoneFormat = (num) => {
   num = num.replace(/[^\d]/g, "");
   if (num.length === 10) {
-    return num.replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3");
+    return num.replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3")
   }
   return num
 }
 
 const urlFormat = (url) => {
-  return url.replace(/^(?:https?:\/\/)?(?:www\.)?/i, "");
+  return url.replace(/^(?:https?:\/\/)?(?:www\.)?/i, "")
 }
 
 const Brewery = (props) => {
     const { brewery } = props.location.state
+
+    const addBrewery = brewery => {
+      db.collection("breweries")
+        .add({
+          id: brewery.id,
+          name: brewery.name,
+          street: brewery.street,
+          city: brewery.city,
+          state: brewery.state,
+          postal_code: brewery.postal_code,
+          country: brewery.country,
+          phone: brewery.phone,
+          latitude: brewery.latitude,
+          longitude: brewery.longitude,
+          tag_list: brewery.tag_list,
+          updated_at: brewery.updated_at,
+          website_url: brewery.website_url
+        })
+        .then(function(docRef) {
+          console.log("Document written with ID: ", docRef.id)
+        })
+        .catch(function(error) {
+          console.error("Error adding document: ", error)
+        })
+    }
+
     return (
       <Container>
         <BrewCard bg="light" border="secondary">
@@ -67,12 +94,23 @@ const Brewery = (props) => {
               <GoogleMapsContainer brewery={brewery} />
             </GoogleWrapper>
             <BtnWrapper>
+              <Link to="/user">
+                <Button
+                  variant="secondary"
+                  block
+                  onClick={addBrewery(brewery)}
+                >
+                  Add Brewery
+                </Button>
+              </Link>
+            </BtnWrapper>
+            <BtnWrapper>
               <Link to="/">
                 <Button
                   variant="secondary"
                   block
                   onClick={() => {
-                    console.log("this fired");
+                    console.log("this fired")
                   }}
                 >
                   Keep fishing
@@ -82,8 +120,7 @@ const Brewery = (props) => {
           </Card.Body>
         </BrewCard>
       </Container>
-    );
-
+    )
 }
 
 export default Brewery
