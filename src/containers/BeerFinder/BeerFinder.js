@@ -7,8 +7,6 @@ import {
 } from '../../utils/api'
 import SearchBar from '../../components/SearchBar'
 import SearchList from '../../components/SearchList'
-import Modal from '../../components/UI/Modal'
-import Login from '../../components/Login'
 import styled from 'styled-components'
 
 const Container = styled.div`
@@ -197,9 +195,6 @@ class BeerFinder extends Component {
 
     return (
       <Container>
-        <Modal>
-          <Login />
-        </Modal>
         <SearchBar
           handleTerms={this.handleTerms}
           handleSubmit={this.handleSubmit}
