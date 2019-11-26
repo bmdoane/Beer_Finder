@@ -7,20 +7,28 @@ import {
 import Layout from './hoc/Layout'
 import BeerFinder from './containers/BeerFinder/BeerFinder'
 import Brewery from './components/Brewery'
+import Login from './components/Login'
+import Register from './components/Register'
 import User from './containers/User/User'
+import { AuthProvider } from './containers/Auth/Auth'
+import PrivateRoute from './components/PrivateRoute'
 
 class App extends Component {
   render() {
     return (
-      <Router>
-        <Layout>
-          <Switch>
-            <Route path="/" exact component={BeerFinder} />
-            <Route path="/brewery" component={Brewery} />
-            <Route path="/user" component={User} />
-          </Switch>
-        </Layout>
-      </Router>
+      <AuthProvider>
+        <Router>
+          <Layout>
+            <Switch>
+              <Route path="/" exact component={BeerFinder} />
+              <Route path="/brewery" component={Brewery} />
+              <Route path="/login" component={Login} />
+              <Route path="/register" component={Register} />
+              <PrivateRoute path="/user" component={User} />
+            </Switch>
+          </Layout>
+        </Router>
+      </AuthProvider>
     );
   }
 }

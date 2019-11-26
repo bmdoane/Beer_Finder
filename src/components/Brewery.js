@@ -41,6 +41,7 @@ const Brewery = (props) => {
     const { brewery } = props.location.state
 
     const addBrewery = brewery => {
+      console.log('Hello')
       db.collection("breweries")
         .add({
           id: brewery.id,

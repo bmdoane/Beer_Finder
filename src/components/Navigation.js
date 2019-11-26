@@ -3,13 +3,18 @@ import Navbar from 'react-bootstrap/Navbar'
 import { NavLink } from 'react-router-dom'
 import useWindowSize from '../utils/windowSize'
 import styled from 'styled-components'
+import { auth } from '../Firebase'
 
 const NavContainer = styled.div`
   min-width: 320px;
 `
 
 const NavbarLink = styled(NavLink)`
-  color: #FFFFFF;
+  color: #ffffff;
+  :hover {
+    color: #ccc;
+    text-decoration: none;
+  }
 `
 
 const Navigation = () => {
@@ -22,7 +27,9 @@ const Navigation = () => {
     <NavContainer>
       <Navbar bg="dark" variant="dark" className="justify-content-between">
         <Navbar.Brand href="/">{brandLogo}</Navbar.Brand>
-        <NavbarLink to="/">Sign Up</NavbarLink>
+        <NavbarLink to="/login">Sign In</NavbarLink>
+        <NavbarLink to="/register">Register</NavbarLink>
+        <NavbarLink to="/" onClick={() => auth.signOut()}>Sign Out</NavbarLink>
       </Navbar>
     </NavContainer>
   );

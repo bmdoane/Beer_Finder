@@ -1,10 +1,9 @@
-import React, { useCallback, useContext } from 'react'
-import { withRouter, Redirect } from 'react-router-dom'
+import React, { useCallback } from 'react'
+import { withRouter } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import styled from 'styled-components'
 import { auth } from '../Firebase'
-import { AuthContext } from '../containers/Auth/Auth'
 
 const Container = styled.div`
   width: 280px;
@@ -29,28 +28,24 @@ const FormLabel = styled(Form.Label)`
   }
 `
 
-const Login = ({ history }) => {
-  const handleLogin = useCallback(async event => {
-    event.preventDefault()
-    const { email, password } = event.target.elements
-    try {
-      await auth.signInWithEmailAndPassword(email.value, password.value)
-      history.push("/user")
-    } catch (error) {
-      alert(error)
-    }
-  }, [history])
-
-  const { currentUser } = useContext(AuthContext)
-  if (currentUser) {
-    return <Redirect to="/user" />
-  }
-
-
+const Register = ({ history }) => {
+  const handleSignUp = useCallback(
+    async event => {
+      event.preventDefault()
+      const { email, password } = event.target.elements
+      try {
+        await auth.createUserWithEmailAndPassword(email.value, password.value)
+        history.push("/")
+      } catch (error) {
+        alert(error)
+      }
+    },
+    [history]
+  )
   return (
     <Container>
       <Headline>Login</Headline>
-      <LoginForm onSubmit={handleLogin}>
+      <LoginForm onSubmit={handleSignUp}>
         <Form.Group>
           <FormLabel>Email</FormLabel>
           <Form.Control
@@ -68,15 +63,12 @@ const Login = ({ history }) => {
             aria-label="Password"
           />
         </Form.Group>
-        <Button
-          variant="primary"
-          type="submit"
-        >
-          Log In
+        <Button variant="success" type="submit">
+          Register
         </Button>
       </LoginForm>
     </Container>
   )
 }
 
-export default withRouter(Login)
+export default withRouter(Register)
