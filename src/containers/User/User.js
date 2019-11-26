@@ -22,19 +22,19 @@ const BreweryList = styled.ul`
     list-style-type: none;
     padding: 3px 0;
   }
-  /* If a link, use one style for Searchlist and user */
+  /* If a link, use one style for Searchlist and User */
   li::before {
     content: "🍺 ";
   }
 `
 
-const abbrState = (brewState) => {
+const abbrState = brewState => {
   return Object.keys(States).find(key => States[key] === brewState)
 }
 
 class User extends Component {
   state = {
-    breweries: [],
+    breweries: []
   }
 
   componentDidMount() {
@@ -50,13 +50,15 @@ class User extends Component {
   }
 
   render() {
-    const { breweries } = this.state;
+    const { breweries } = this.state
     return (
       <Container>
         <Headline>My watering holes</Headline>
         {breweries.map(brewery => (
           <BreweryList key={brewery.id}>
-            <li>{brewery.name} - {brewery.city}, {abbrState(brewery.state)}</li>
+            <li>
+              {brewery.name} - {brewery.city}, {abbrState(brewery.state)}
+            </li>
           </BreweryList>
         ))}
       </Container>
