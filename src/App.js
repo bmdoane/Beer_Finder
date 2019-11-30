@@ -29,7 +29,7 @@ class App extends Component {
           </Layout>
         </Router>
       </AuthProvider>
-    );
+    )
   }
 }
 
