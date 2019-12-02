@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, useContext } from 'react'
 import styled from 'styled-components'
 import db from '../../Firebase'
 import States from 'datasets-us-states-abbr-names'
@@ -34,18 +34,19 @@ const abbrState = brewState => {
 
 class User extends Component {
   state = {
-    breweries: []
+    user: '',
+    userBreweries: [],
   }
 
   componentDidMount() {
-    db.collection("breweries")
+    db.collection("users")
       .get()
       .then(querySnapshot => {
         const data = querySnapshot.docs.map(
           doc => console.log("docId", doc.id) || doc.data()
         )
-        console.log("data", data)
-        this.setState({ breweries: data })
+        console.log("data", data.breweries)
+        this.setState({ userBreweries: data.userBreweries })
       })
   }
 
@@ -54,13 +55,7 @@ class User extends Component {
     return (
       <Container>
         <Headline>My watering holes</Headline>
-        {breweries.map(brewery => (
-          <BreweryList key={brewery.id}>
-            <li>
-              {brewery.name} - {brewery.city}, {abbrState(brewery.state)}
-            </li>
-          </BreweryList>
-        ))}
+      
       </Container>
     )
   }

@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import styled from 'styled-components'
 import { auth } from '../Firebase'
-import { AuthContext } from '../containers/Auth/Auth'
+import { AuthContext } from '../services/Auth'
 
 const Container = styled.div`
   width: 280px;
