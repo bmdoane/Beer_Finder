@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import styled from 'styled-components'
-import { auth } from '../Firebase'
+import db, { auth } from '../Firebase'
 
 const Container = styled.div`
   width: 280px;
@@ -34,7 +34,20 @@ const Register = ({ history }) => {
       event.preventDefault()
       const { email, password } = event.target.elements
       try {
-        await auth.createUserWithEmailAndPassword(email.value, password.value)
+        await auth
+          .createUserWithEmailAndPassword(email.value, password.value)
+          .then(cred => {
+            console.log("cred", cred)
+            // Do you want to set a username to credential with input?
+            return db
+              .collection("users")
+              .doc(cred.user.uid)
+              .set({
+                userName: cred.user.email,
+                memberSince: new Date(),
+                breweries:[]
+              })
+          })
         history.push("/")
       } catch (error) {
         alert(error)

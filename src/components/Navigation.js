@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import useWindowSize from '../utils/windowSize'
 import styled from 'styled-components'
 import { auth } from '../Firebase'
-import { AuthContext } from '../containers/Auth/Auth'
+import { AuthContext } from '../services/Auth'
 
 const NavContainer = styled.div`
   min-width: 320px;

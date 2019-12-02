@@ -5,7 +5,8 @@ import Button from 'react-bootstrap/Button'
 import GoogleMapsContainer from './Map'
 import styled from 'styled-components'
 import db from '../Firebase'
-import { AuthContext } from "../containers/Auth/Auth";
+import { firestore } from 'firebase/app'
+import { AuthContext } from '../services/Auth'
 
 const Container = styled.div`
   margin: 0 auto;
@@ -41,33 +42,13 @@ const urlFormat = (url) => {
 const Brewery = (props) => {
   const { brewery } = props.location.state
 
+  const { currentUser } = useContext(AuthContext)
   const addBrewery = brewery => {
-    console.log('Hello')
-    db.collection("breweries")
-      .add({
-        id: brewery.id,
-        name: brewery.name,
-        street: brewery.street,
-        city: brewery.city,
-        state: brewery.state,
-        postal_code: brewery.postal_code,
-        country: brewery.country,
-        phone: brewery.phone,
-        latitude: brewery.latitude,
-        longitude: brewery.longitude,
-        tag_list: brewery.tag_list,
-        updated_at: brewery.updated_at,
-        website_url: brewery.website_url
-      })
-      .then(function(docRef) {
-        console.log("Document written with ID: ", docRef.id)
-      })
-      .catch(function(error) {
-        console.error("Error adding document: ", error)
-      })
+    db.collection("users")
+      .doc(currentUser.uid)
+      .update({ userBreweries: firestore.FieldValue.arrayUnion(brewery.id) })
   }
 
-  const { currentUser } = useContext(AuthContext)
   const addBreweryBtn = currentUser ? (
     <BtnWrapper>
       <Link to="/user">

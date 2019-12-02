@@ -10,7 +10,7 @@ import Brewery from './components/Brewery'
 import Login from './components/Login'
 import Register from './components/Register'
 import User from './containers/User/User'
-import { AuthProvider } from './containers/Auth/Auth'
+import { AuthProvider } from './services/Auth'
 import PrivateRoute from './components/PrivateRoute'
 
 class App extends Component {
