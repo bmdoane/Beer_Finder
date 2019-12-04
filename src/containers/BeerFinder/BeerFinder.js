@@ -151,7 +151,7 @@ class BeerFinder extends Component {
       getByTwoTerms(searchTerms[0], searchTerms[1])
         .then((data) => {
           if (data.length === 0) {
-            this.dataCheck();
+            this.dataCheck()
           } else {
             this.setState({
               breweries: data,
@@ -167,7 +167,7 @@ class BeerFinder extends Component {
       getByThreeTerms(searchTerms[0], searchTerms[1], searchTerms[2]).then(
         data => {
           if (data.length === 0) {
-            this.dataCheck();
+            this.dataCheck()
           } else {
             this.setState({
               breweries: data,
@@ -191,7 +191,7 @@ class BeerFinder extends Component {
 
   render() {
     console.log('this.state', this.state)
-    const { searchName, searchCity, searchState, searchMade, breweries, alert } = this.state
+    const { searchName, searchCity, searchState, searchMade, breweries, alert, userId } = this.state
 
     return (
       <Container>
@@ -207,7 +207,7 @@ class BeerFinder extends Component {
         />
         <SearchList
           breweries={breweries}
-          searchMade={searchMade}
+          userId={userId}
         />
       </Container>
     )

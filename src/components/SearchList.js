@@ -36,19 +36,19 @@ const abbrState = brewState => {
   return Object.keys(States).find(key => States[key] === brewState)
 }
 
-const SearchList = ({ breweries, searchMade }) => {
+const SearchList = ({ breweries }) => {
   return (
     <BreweryListContainer>
       <BreweryList>
-        {breweries.map(brew => {
-          const { name, city, state, id } = brew
+        {breweries.map(brewery => {
+          const { name, city, state, id } = brewery
           return (
             <li key={id}>
               <BreweryLink
                 to={{
                   pathname: "/brewery",
                   state: {
-                    brewery: brew
+                    brewery: brewery,
                   }
                 }}
               >

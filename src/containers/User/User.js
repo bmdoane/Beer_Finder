@@ -1,7 +1,9 @@
-import React, { Component, useContext } from 'react'
+import React, { Component } from 'react'
 import styled from 'styled-components'
 import db from '../../Firebase'
 import States from 'datasets-us-states-abbr-names'
+import { AuthContext } from '../../services/Auth'
+import { getById } from '../../utils/api'
 
 const Container = styled.div`
   max-width: 450px;
@@ -32,30 +34,62 @@ const abbrState = brewState => {
   return Object.keys(States).find(key => States[key] === brewState)
 }
 
+const getBreweries = userBreweries => {
+  return Promise.all(userBreweries.map(id => getById(id)))
+}
+
 class User extends Component {
+  static contextType = AuthContext
+
   state = {
-    user: '',
+    user: {
+      memberSince: '',
+      userName: '',
+    },
     userBreweries: [],
   }
 
   componentDidMount() {
-    db.collection("users")
+    const { currentUser } = this.context
+
+    db.doc(`users/${currentUser.uid}`)
       .get()
-      .then(querySnapshot => {
-        const data = querySnapshot.docs.map(
-          doc => console.log("docId", doc.id) || doc.data()
-        )
-        console.log("data", data.breweries)
-        this.setState({ userBreweries: data.userBreweries })
+      .then(doc => {
+        if (doc.exists) {
+          let data = doc.data()
+          return data
+        } else {
+          throw new Error("No such document!")
+        }
+      })
+      .then(data => {
+        const { userBreweries, memberSince, userName } = data
+        let timeStamp = memberSince.toDate()
+        this.setState({user: {
+          memberSince: timeStamp,
+          userName: userName,
+        }})
+        return getBreweries(userBreweries)
+      })
+      .then(breweries => this.setState({userBreweries: breweries}))
+      .catch(error => {
+        console.log("Error getting document:", error)
       })
   }
 
   render() {
-    const { breweries } = this.state
+    const { userBreweries } = this.state
+
     return (
       <Container>
         <Headline>My watering holes</Headline>
-      
+        {userBreweries.map(brewery => (
+          <BreweryList key={brewery.id}>
+            <li>
+              {brewery.name} - {brewery.city}, {abbrState(brewery.state)}
+            </li>
+          </BreweryList>
+        ))}
       </Container>
     )
   }
