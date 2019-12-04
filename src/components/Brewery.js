@@ -40,12 +40,12 @@ const urlFormat = (url) => {
 }
 
 const Brewery = (props) => {
+  console.log('props.location.state', props.location.state)
   const { brewery } = props.location.state
 
   const { currentUser } = useContext(AuthContext)
   const addBrewery = brewery => {
-    db.collection("users")
-      .doc(currentUser.uid)
+    db.doc(`users/${currentUser.uid}`)
       .update({ userBreweries: firestore.FieldValue.arrayUnion(brewery.id) })
   }
 

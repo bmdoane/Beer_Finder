@@ -45,7 +45,7 @@ const Register = ({ history }) => {
               .set({
                 userName: cred.user.email,
                 memberSince: new Date(),
-                breweries:[]
+                userBreweries:[]
               })
           })
         history.push("/")
@@ -57,7 +57,7 @@ const Register = ({ history }) => {
   )
   return (
     <Container>
-      <Headline>Login</Headline>
+      <Headline>Register</Headline>
       <LoginForm onSubmit={handleSignUp}>
         <Form.Group>
           <FormLabel>Email</FormLabel>
