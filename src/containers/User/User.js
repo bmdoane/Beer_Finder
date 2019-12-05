@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import db from '../../Firebase'
 import States from 'datasets-us-states-abbr-names'
 import { AuthContext } from '../../services/Auth'
-import { getById } from '../../utils/api'
+import { getBrewery } from '../../utils/api'
 
 const Container = styled.div`
   max-width: 450px;
@@ -34,8 +34,8 @@ const abbrState = brewState => {
   return Object.keys(States).find(key => States[key] === brewState)
 }
 
-const getBreweries = userBreweries => {
-  return Promise.all(userBreweries.map(id => getById(id)))
+const getUserBreweries = userBreweries => {
+  return Promise.all(userBreweries.map(id => getBrewery("/" + id)))
 }
 
 class User extends Component {
@@ -69,7 +69,7 @@ class User extends Component {
           memberSince: timeStamp,
           userName: userName,
         }})
-        return getBreweries(userBreweries)
+        return getUserBreweries(userBreweries)
       })
       .then(breweries => this.setState({userBreweries: breweries}))
       .catch(error => {
