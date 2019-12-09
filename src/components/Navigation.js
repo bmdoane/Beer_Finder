@@ -27,10 +27,10 @@ const NavUserAccess = styled.div`
 
 const Navigation = () => {
   let brandLogo = "🍻BeerFinder🍻"
-  const [width] = useWindowSize()
-  if (width <= 450) {
-    brandLogo = "🍻BF🍻";
-  }
+  // const [width] = useWindowSize()
+  // if (width <= 450) {
+  //   brandLogo = "🍻BF🍻";
+  // }
 
   const { currentUser } = useContext(AuthContext)
   let UserNav = currentUser ? (
@@ -39,8 +39,12 @@ const Navigation = () => {
     </NavbarLink>
   ) : (
     <NavUserAccess>
-      <NavbarLink to="/login">Sign In</NavbarLink>
-      <NavbarLink to="/register">Register</NavbarLink>
+      <NavbarLink to="/login">
+        Sign In
+      </NavbarLink>
+      <NavbarLink to="/register">
+        Register
+      </NavbarLink>
     </NavUserAccess>
   );
 

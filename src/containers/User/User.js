@@ -64,6 +64,7 @@ class User extends Component {
       })
       .then(data => {
         const { userBreweries, memberSince, userName } = data
+        console.log('data', data)
         let timeStamp = memberSince.toDate()
         this.setState({user: {
           memberSince: timeStamp,
@@ -79,6 +80,7 @@ class User extends Component {
 
   render() {
     const { userBreweries } = this.state
+    // const { userName, memberSince } = this.state.user
 
     return (
       <Container>

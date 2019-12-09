@@ -40,7 +40,6 @@ const urlFormat = (url) => {
 }
 
 const Brewery = (props) => {
-  console.log('props.location.state', props.location.state)
   const { brewery } = props.location.state
 
   const { currentUser } = useContext(AuthContext)

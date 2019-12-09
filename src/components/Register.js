@@ -1,19 +1,12 @@
 import React, { useCallback } from 'react'
 import { withRouter } from 'react-router-dom'
-import Button from 'react-bootstrap/Button'
-import Form from 'react-bootstrap/Form'
 import styled from 'styled-components'
 import db, { auth } from '../Firebase'
+import AccessForm from '../components/AccessForm'
 
 const Container = styled.div`
   width: 280px;
   margin: 0 auto;
-`
-
-const LoginForm = styled(Form)`
-  button:first-of-type {
-    margin-right: 10px;
-  }
 `
 
 const Headline = styled.h3`
@@ -22,28 +15,22 @@ const Headline = styled.h3`
   margin-bottom: 5px;
 `
 
-const FormLabel = styled(Form.Label)`
-  :not(:first-child) {
-    padding-top: 5px;
-  }
-`
-
 const Register = ({ history }) => {
+  const isLoggingIn = false
+
   const handleSignUp = useCallback(
     async event => {
       event.preventDefault()
-      const { email, password } = event.target.elements
+      const { email, password, userName } = event.target.elements
       try {
         await auth
           .createUserWithEmailAndPassword(email.value, password.value)
           .then(cred => {
-            console.log("cred", cred)
-            // Do you want to set a username to credential with input?
             return db
               .collection("users")
               .doc(cred.user.uid)
               .set({
-                userName: cred.user.email,
+                userName: userName.value,
                 memberSince: new Date(),
                 userBreweries:[]
               })
@@ -58,28 +45,9 @@ const Register = ({ history }) => {
   return (
     <Container>
       <Headline>Register</Headline>
-      <LoginForm onSubmit={handleSignUp}>
-        <Form.Group>
-          <FormLabel>Email</FormLabel>
-          <Form.Control
-            autoFocus
-            type="email"
-            name="email"
-            placeholder="Email"
-            aria-label="Email"
-          />
-          <FormLabel>Password</FormLabel>
-          <Form.Control
-            type="password"
-            name="password"
-            placeholder="Password"
-            aria-label="Password"
-          />
-        </Form.Group>
-        <Button variant="success" type="submit">
-          Register
-        </Button>
-      </LoginForm>
+      <AccessForm
+        handleSignUp={handleSignUp}
+        isLoggingIn={isLoggingIn} />
     </Container>
   )
 }
