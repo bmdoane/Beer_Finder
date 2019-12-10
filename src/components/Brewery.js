@@ -13,6 +13,7 @@ const Container = styled.div`
 `
 
 const BrewCard = styled(Card)`
+  margin-top: 25px;
   width: 320px;
 `
 
@@ -54,7 +55,7 @@ const Brewery = (props) => {
         <Button
           variant="secondary"
           block
-          onClick={addBrewery(brewery)}
+          onClick={() => addBrewery(brewery)}
         >
           Add Brewery
         </Button>

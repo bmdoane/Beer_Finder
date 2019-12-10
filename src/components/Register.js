@@ -16,8 +16,6 @@ const Headline = styled.h3`
 `
 
 const Register = ({ history }) => {
-  const isLoggingIn = false
-
   const handleSignUp = useCallback(
     async event => {
       event.preventDefault()
@@ -47,7 +45,7 @@ const Register = ({ history }) => {
       <Headline>Register</Headline>
       <AccessForm
         handleSignUp={handleSignUp}
-        isLoggingIn={isLoggingIn} />
+        isLoggingIn={false} />
     </Container>
   )
 }

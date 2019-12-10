@@ -17,8 +17,7 @@ const FormLabel = styled(Form.Label)`
   }
 `;
 
-const AccessForm = (props) => {
-  console.log('af', props)
+const AccessForm = props => {
   const { handleLogin, handleSignUp, isLoggingIn } = props
 
   const formButton = isLoggingIn ?

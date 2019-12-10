@@ -17,8 +17,6 @@ const Headline = styled.h3`
 `
 
 const Login = ({ history }) => {
-  const isLoggingIn = true
-
   const handleLogin = useCallback(async event => {
     event.preventDefault()
     const { email, password } = event.target.elements
@@ -41,7 +39,7 @@ const Login = ({ history }) => {
       <Headline>Login</Headline>
       <AccessForm
         handleLogin={handleLogin}
-        isLoggingIn={isLoggingIn} />
+        isLoggingIn={true} />
     </Container>
   )
 }
