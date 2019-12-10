@@ -6,8 +6,10 @@ import SearchList from '../../components/SearchList'
 import styled from 'styled-components'
 
 const Container = styled.div`
-  max-width: 450px;
+  width: 100%;
+  height: 600px;
   margin: 0 auto;
+  background-color: #FFFFFF;
 `
 
 class BeerFinder extends Component {

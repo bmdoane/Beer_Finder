@@ -39,15 +39,23 @@ const Navigation = () => {
     </NavbarLink>
   ) : (
     <NavUserAccess>
-      <NavbarLink to="/login">Sign In</NavbarLink>
-      <NavbarLink to="/register">Register</NavbarLink>
+      <NavbarLink to="/login">
+        Sign In
+      </NavbarLink>
+      <NavbarLink to="/register">
+        Register
+      </NavbarLink>
     </NavUserAccess>
   );
 
   return (
     <NavContainer>
       <Navbar bg="dark" variant="dark" className="justify-content-between">
-        <Navbar.Brand href="/">{brandLogo}</Navbar.Brand>
+        <Navbar.Brand>
+          <NavbarLink to="/">
+            {brandLogo}
+          </NavbarLink>
+        </Navbar.Brand>
         {UserNav}
       </Navbar>
     </NavContainer>

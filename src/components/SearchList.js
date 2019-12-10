@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 const BreweryListContainer = styled.div`
+  margin: 0 auto;
   padding: 20px 0;
   max-width: 450px;
 `

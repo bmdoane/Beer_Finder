@@ -13,6 +13,7 @@ const Container = styled.div`
 `
 
 const BrewCard = styled(Card)`
+  margin-top: 25px;
   width: 320px;
 `
 
@@ -40,7 +41,6 @@ const urlFormat = (url) => {
 }
 
 const Brewery = (props) => {
-  console.log('props.location.state', props.location.state)
   const { brewery } = props.location.state
 
   const { currentUser } = useContext(AuthContext)
@@ -55,7 +55,7 @@ const Brewery = (props) => {
         <Button
           variant="secondary"
           block
-          onClick={addBrewery(brewery)}
+          onClick={() => addBrewery(brewery)}
         >
           Add Brewery
         </Button>

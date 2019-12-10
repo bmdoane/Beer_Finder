@@ -12,7 +12,7 @@ const Container = styled.div`
 const Headline = styled.h3`
   text-align: center;
   padding: 10px 0;
-  margin-bottom: 14px;
+  margin: 10px 0 14px;
 `
 
 const FormLabel = styled(Form.Label)`
