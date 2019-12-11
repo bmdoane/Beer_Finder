@@ -11,12 +11,10 @@ const MainContainer = styled.div`
 class Layout extends Component {
   render() {
     return (
-      <>
-        <MainContainer>
-          <Navigation />
-          {this.props.children}
-        </MainContainer>
-      </>
+      <MainContainer>
+        <Navigation />
+        {this.props.children}
+      </MainContainer>
     );
   }
 }

@@ -51,7 +51,7 @@ class User extends Component {
 
   componentDidMount() {
     const { currentUser } = this.context
-
+    console.log('User', currentUser)
     db.doc(`users/${currentUser.uid}`)
       .get()
       .then(doc => {
