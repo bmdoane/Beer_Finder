@@ -9,7 +9,7 @@ import { firestore } from 'firebase/app'
 import { AuthContext } from '../services/Auth'
 
 const Container = styled.div`
-  margin: 0 auto;
+  margin: 0 auto 30px;
 `
 
 const BrewCard = styled(Card)`
@@ -66,7 +66,7 @@ const Brewery = (props) => {
 
   return (
     <Container>
-      <BrewCard bg="light" border="secondary">
+      <BrewCard className="border-dark" bg="light">
         <Card.Header as="h3" style={{ textAlign: "center" }}>
           {brewery.name}
         </Card.Header>
@@ -84,8 +84,7 @@ const Brewery = (props) => {
           <Card.Text style={{ margin: "0 0 20 0" }}>
             <a
               style={{ color: "inherit", fontWeight: "bold" }}
-              href={brewery.website_url}
-            >
+              href={brewery.website_url}>
               {urlFormat(brewery.website_url)}
             </a>
           </Card.Text>
@@ -99,9 +98,8 @@ const Brewery = (props) => {
                 variant="secondary"
                 block
                 onClick={() => {
-                  console.log("this fired")
-                }}
-              >
+                  console.log("this fired");
+                }}>
                 Keep fishing
               </Button>
             </Link>
@@ -109,7 +107,7 @@ const Brewery = (props) => {
         </Card.Body>
       </BrewCard>
     </Container>
-  )
+  );
 }
 
 export default Brewery

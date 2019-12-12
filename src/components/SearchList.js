@@ -10,7 +10,7 @@ const BreweryListContainer = styled.div`
 `
 
 const BreweryList = styled.ul`
-  padding: 0 20px;
+  /* padding: 0 20px; */
   margin: 0 auto;
 
   & li {

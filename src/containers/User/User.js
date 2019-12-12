@@ -4,15 +4,28 @@ import db from '../../Firebase'
 import States from 'datasets-us-states-abbr-names'
 import { AuthContext } from '../../services/Auth'
 import { getBrewery } from '../../utils/api'
+import { FaBeer } from 'react-icons/fa'
+import { MdPortrait } from "react-icons/md";
 
 const Container = styled.div`
   max-width: 450px;
   margin: 0 auto;
-`
+  border: 1px solid #008000;
+
+`;
+
+const BeerIcon = styled(FaBeer)`
+  color: #343A40;
+  font-size: 96px;
+`;
+
+const PortraitIcon = styled(MdPortrait)`
+  color: #343a40;
+  font-size: 180px;
+`;
 
 const Headline = styled.h3`
   text-align: center;
-  padding: 10px 0;
   margin-bottom: 14px;
 `
 
@@ -84,6 +97,7 @@ class User extends Component {
 
     return (
       <Container>
+        <PortraitIcon />
         <Headline>My watering holes</Headline>
         {userBreweries.map(brewery => (
           <BreweryList key={brewery.id}>
