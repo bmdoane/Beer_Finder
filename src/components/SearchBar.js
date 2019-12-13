@@ -5,8 +5,9 @@ import Alert from '../components/Alert'
 import styled from 'styled-components'
 
 const Container = styled.div`
-  width: 280px;
+  width: 320px;
   margin: 0 auto;
+  padding: 0 5px;
 `
 
 const Headline = styled.h3`

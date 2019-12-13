@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import Navbar from 'react-bootstrap/Navbar'
 import { NavLink } from 'react-router-dom'
-// import useWindowSize from '../utils/windowSize'
+import useWindowSize from '../utils/windowSize'
+// import { FaHome } from "react-icons/fa";
 import styled from 'styled-components'
 import { auth } from '../Firebase'
 import { AuthContext } from '../services/Auth'
@@ -27,13 +28,12 @@ const NavUserAccess = styled.div`
 
 const Navigation = () => {
   let brandLogo = "🍻BeerFinder🍻"
-  // const [width] = useWindowSize()
-  // if (width <= 450) {
-  //   brandLogo = "🍻BF🍻";
-  // }
+  const [width] = useWindowSize()
+  if (width <= 450) {
+    brandLogo = "🍻BF🍻";
+  }
 
   const { currentUser } = useContext(AuthContext)
-  console.log('Navigation', currentUser)
   let UserNav = currentUser ? (
     <NavbarLink to="/" onClick={() => auth.signOut()}>
       Sign Out

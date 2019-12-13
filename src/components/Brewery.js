@@ -9,7 +9,7 @@ import { firestore } from 'firebase/app'
 import { AuthContext } from '../services/Auth'
 
 const Container = styled.div`
-  margin: 0 auto 30px;
+  margin: 0 auto 40px;
 `
 
 const BrewCard = styled(Card)`

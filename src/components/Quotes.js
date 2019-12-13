@@ -3,8 +3,11 @@ import Card from 'react-bootstrap/Card'
 import styled from 'styled-components'
 
 const QuoteCard = styled(Card)`
-  margin: 0 40px;
-`
+  margin: 0 40px 40px;
+  @media (max-width: 450px) {
+    margin: 0 20px 40px;
+  }
+`;
 
 const Quotes = () => {
   return (
