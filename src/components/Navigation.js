@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import Navbar from 'react-bootstrap/Navbar'
 import { NavLink } from 'react-router-dom'
 import useWindowSize from '../utils/windowSize'
+// import { FaHome } from "react-icons/fa";
 import styled from 'styled-components'
 import { auth } from '../Firebase'
 import { AuthContext } from '../services/Auth'

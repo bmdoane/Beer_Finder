@@ -3,11 +3,10 @@ import States from 'datasets-us-states-abbr-names'
 import { getBrewery } from '../../utils/api'
 import SearchBar from '../../components/SearchBar'
 import SearchList from '../../components/SearchList'
+import Quotes from '../../components/Quotes'
 import styled from 'styled-components'
 
 const Container = styled.div`
-  width: 100%;
-  height: 600px;
   margin: 0 auto;
   background-color: #FFFFFF;
 `
@@ -204,6 +203,7 @@ class BeerFinder extends Component {
           alert={alert}
         />
         <SearchList breweries={breweries} userId={userId} />
+        <Quotes />
       </Container>
     );
   }

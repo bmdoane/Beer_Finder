@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 const BreweryListContainer = styled.div`
+  max-width: 450px;
   margin: 0 auto;
   padding: 20px 0;
-  max-width: 450px;
 `
 
 const BreweryList = styled.ul`
-  padding: 0 20px;
   margin: 0 auto;
+  padding: 0 20px;
 
   & li {
     list-style-type: none;

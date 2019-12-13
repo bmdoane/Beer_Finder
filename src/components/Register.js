@@ -29,7 +29,7 @@ const Register = ({ history }) => {
               .doc(cred.user.uid)
               .set({
                 userName: userName.value,
-                memberSince: new Date(),
+                memberSince: new Date().toString(),
                 userBreweries:[]
               })
           })

@@ -1,5 +1,5 @@
 export function getBrewery(searchTerm) {
-  return fetch(`https://api.openbrewerydb.org/breweries${searchTerm}`)
+  return fetch(`https://api.openbrewerydb.org/breweries${searchTerm}&per_page=50`)
     .then(res => res.json())
     .then(data => {
       if (!data) {

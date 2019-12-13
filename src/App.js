@@ -10,6 +10,7 @@ import Brewery from './components/Brewery'
 import Login from './components/Login'
 import Register from './components/Register'
 import User from './containers/User/User'
+import UserBrewery from './components/UserBrewery'
 import { AuthProvider } from './services/Auth'
 import PrivateRoute from './components/PrivateRoute'
 
@@ -25,11 +26,12 @@ class App extends Component {
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
               <PrivateRoute path="/user" component={User} />
+              <PrivateRoute path="/userBrewery" component={UserBrewery} />
             </Switch>
           </Layout>
         </Router>
       </AuthProvider>
-    )
+    );
   }
 }
 
