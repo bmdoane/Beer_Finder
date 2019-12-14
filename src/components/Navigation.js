@@ -1,8 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef, useState } from 'react'
 import Navbar from 'react-bootstrap/Navbar'
+import Tooltip from 'react-bootstrap/Tooltip'
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import { NavLink } from 'react-router-dom'
 import useWindowSize from '../utils/windowSize'
-// import { FaHome } from "react-icons/fa";
+import { FaHome, FaUserPlus, FaSignInAlt, FaSignOutAlt } from 'react-icons/fa'
 import styled from 'styled-components'
 import { auth } from '../Firebase'
 import { AuthContext } from '../services/Auth'
@@ -13,6 +15,7 @@ const NavContainer = styled.div`
 
 const NavbarLink = styled(NavLink)`
   color: #ffffff;
+  font-size: 24px;
   :hover {
     color: #ccc;
     text-decoration: none;
@@ -33,21 +36,45 @@ const Navigation = () => {
     brandLogo = "🍻BF🍻";
   }
 
+  const tooltipInsert = (navLink) => {
+    const tooltip = (
+      <Tooltip>{navLink}</Tooltip>
+    )
+    return tooltip
+  }
+
   const { currentUser } = useContext(AuthContext)
   let UserNav = currentUser ? (
-    <NavbarLink to="/" onClick={() => auth.signOut()}>
-      Sign Out
-    </NavbarLink>
+    <NavUserAccess>
+      <OverlayTrigger
+        trigger="hover"
+        placement="bottom"
+        overlay={tooltipInsert("Sign Out")}>
+        <NavbarLink to="/" onClick={() => auth.signOut()}>
+          <FaSignOutAlt />
+        </NavbarLink>
+      </OverlayTrigger>
+    </NavUserAccess>
   ) : (
     <NavUserAccess>
-      <NavbarLink to="/login">
-        Sign In
-      </NavbarLink>
-      <NavbarLink to="/register">
-        Register
-      </NavbarLink>
+      <OverlayTrigger
+        trigger="hover"
+        placement="bottom"
+        overlay={tooltipInsert("Sign In")}>
+        <NavbarLink to="/login">
+          <FaSignInAlt />
+        </NavbarLink>
+      </OverlayTrigger>
+      <OverlayTrigger
+        trigger="hover"
+        placement="bottom"
+        overlay={tooltipInsert("Register")}>
+        <NavbarLink to="/register">
+          <FaUserPlus />
+        </NavbarLink>
+      </OverlayTrigger>
     </NavUserAccess>
-  );
+  )
 
   return (
     <NavContainer>
