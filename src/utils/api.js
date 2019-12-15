@@ -6,5 +6,5 @@ export function getBrewery(searchTerm) {
         throw new Error("No data was found");
       }
       return data;
-    });
+    })
 }

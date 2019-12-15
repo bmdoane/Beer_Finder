@@ -1,11 +1,9 @@
-import React, { useContext } from "react";
+import React from 'react'
 import Navbar from 'react-bootstrap/Navbar'
 import { NavLink } from 'react-router-dom'
 import useWindowSize from '../utils/windowSize'
-// import { FaHome } from "react-icons/fa";
 import styled from 'styled-components'
-import { auth } from '../Firebase'
-import { AuthContext } from '../services/Auth'
+import NavUserLinks from './NavUserLinks'
 
 const NavContainer = styled.div`
   min-width: 320px;
@@ -13,16 +11,10 @@ const NavContainer = styled.div`
 
 const NavbarLink = styled(NavLink)`
   color: #ffffff;
+  font-size: 24px;
   :hover {
     color: #ccc;
     text-decoration: none;
-  }
-`
-
-const NavUserAccess = styled.div`
-  justify-content: right;
-  a:last-child {
-    padding-left: 20px;
   }
 `
 
@@ -33,22 +25,6 @@ const Navigation = () => {
     brandLogo = "🍻BF🍻";
   }
 
-  const { currentUser } = useContext(AuthContext)
-  let UserNav = currentUser ? (
-    <NavbarLink to="/" onClick={() => auth.signOut()}>
-      Sign Out
-    </NavbarLink>
-  ) : (
-    <NavUserAccess>
-      <NavbarLink to="/login">
-        Sign In
-      </NavbarLink>
-      <NavbarLink to="/register">
-        Register
-      </NavbarLink>
-    </NavUserAccess>
-  );
-
   return (
     <NavContainer>
       <Navbar bg="dark" variant="dark" className="justify-content-between">
@@ -57,10 +33,10 @@ const Navigation = () => {
             {brandLogo}
           </NavbarLink>
         </Navbar.Brand>
-        {UserNav}
+        <NavUserLinks />
       </Navbar>
     </NavContainer>
-  );
+  )
 }
 
 export default Navigation

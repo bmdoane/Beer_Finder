@@ -1,0 +1,109 @@
+{
+  "quotes": [
+    {
+      "id": 1,
+      "scribe": "Oscar Wilde",
+      "title": "Irish poet",
+      "quote": "Work is the curse of the drinking classes."
+    },
+    {
+      "id": 2,
+      "scribe": "Abraham Lincoln",
+      "title": "America's 16th president",
+      "quote": "I am a firm believer in the people. If given the truth, they can be depended upon to meet any national crisis. The great point is to bring them the real facts, and beer."
+    },
+    {
+      "id": 3,
+      "scribe": "Frank Zappa",
+      "title": "Musician",
+      "quote": "You can't be a real country unless you have a beer and an airline - it helps if you have some kind of football team, or some nuclear weapons, but in the very least you need a beer."
+    },
+    {
+      "id": 4,
+      "scribe": "Thomas Jefferson",
+      "title": "America's 3rd president",
+      "quote": "Beer, if drunk in moderation, softens the temper, cheers the spirit and promotes health."
+    },
+    {
+      "id": 5,
+      "scribe": "Tina Fey",
+      "title": "Comedian",
+      "quote": "In a study, scientists report that drinking beer can be good for the liver. I’m sorry, did I say ‘scientists’? I meant Irish people."
+    },
+    {
+      "id": 6,
+      "scribe": "Ray Bradbury",
+      "title": "Author and screenwriter",
+      "quote": "Beer’s intellectual. What a shame so many idiots drink it."
+    },
+    {
+      "id": 7,
+      "scribe": "Stephen King",
+      "title": "Author",
+      "quote": "A man who lies about beer makes enemies."
+    },
+    {
+      "id": 8,
+      "scribe": "Hunter S.Thompson",
+      "title": "Gonzo journalist",
+      "quote": "There is an ancient Celtic axiom that says ‘Good people drink good beer.’ Which is true, then as now. Just look around you in any public barroom and you will quickly see: Bad people drink bad beer. Think about it."
+    },
+    {
+      "id": 9,
+      "scribe": "Julia Hartz",
+      "title": "American entrepreneur",
+      "quote": "Swaying to new beats, hearing old favorites, and drinking expensive beer are ageless pastimes."
+    },
+    {
+      "id": 10,
+      "scribe": "Homer Jay Simpson",
+      "title": "American pop icon",
+      "quote": "Homer no function beer well without."
+    },
+    {
+      "id": 11,
+      "scribe": "Homer Jay Simpson",
+      "title": "Donut enthusiast",
+      "quote": "I would kill everyone in this room for a drop of sweet beer."
+    },
+    {
+      "id": 12,
+      "scribe": "Homer Jay Simpson",
+      "title": "Devoted father",
+      "quote": "Ah, beer, my one weakness. My Achille’s heel, if you will."
+    },
+    {
+      "id": 13,
+      "scribe": "Homer Jay Simpson",
+      "title": "Sector 7G safety inspector",
+      "quote": "Oh, Lisa, you and your stories: Bart’s a vampire, beer kills brain cells. Now let’s go back to that… building… thingie… where our beds and TV… is."
+    },
+    {
+      "id": 14,
+      "scribe": "Plato",
+      "title": "Philosopher",
+      "quote": "He was a wise man who invented beer."
+    },
+    {
+      "id": 15,
+      "scribe": "Winston Churchill",
+      "title": "Prime Minister of England",
+      "quote": "Most people hate the taste of beer to begin with. It is, however, a prejudice."
+    },
+    {
+      "id": 16,
+      "scribe": "Steven Wright",
+      "title": "Comedian",
+      "quote": "24 hours in a day, 24 beers in a case. Coincidence?"
+    },
+    {
+      "id": 17,
+      "scribe": "George Carlin",
+      "title": "Comedian",
+      "quote": "Give a man a fish and he will eat for a day. Teach him how to fish, and he will sit in a boat and drink beer all day."
+    }
+  ]
+}
+
+
+

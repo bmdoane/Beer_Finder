@@ -5,6 +5,7 @@ import SearchBar from '../../components/SearchBar'
 import SearchList from '../../components/SearchList'
 import Quotes from '../../components/Quotes'
 import styled from 'styled-components'
+import beerQuotes from '../../data/quotes'
 
 const Container = styled.div`
   margin: 0 auto;
@@ -32,8 +33,15 @@ class BeerFinder extends Component {
       addStatus: false,
       badStatus: false
     },
-    breweries: []
+    breweries: [],
+    singleQuote: {}
   };
+
+  componentDidMount() {
+    const { quotes } = beerQuotes
+    const singleQuote = quotes[Math.floor(Math.random() * quotes.length)]
+    this.setState({ singleQuote })
+  }
 
   handleTerms = e => {
     const inputValue = e.target.value;
@@ -179,6 +187,7 @@ class BeerFinder extends Component {
     this.noTerms(searchName, searchCity, searchState);
   };
 
+
   render() {
     const {
       searchName,
@@ -187,7 +196,8 @@ class BeerFinder extends Component {
       searchMade,
       breweries,
       alert,
-      userId
+      userId,
+      singleQuote
     } = this.state;
 
     return (
@@ -203,7 +213,7 @@ class BeerFinder extends Component {
           alert={alert}
         />
         <SearchList breweries={breweries} userId={userId} />
-        <Quotes />
+        <Quotes singleQuote={singleQuote} />
       </Container>
     );
   }
