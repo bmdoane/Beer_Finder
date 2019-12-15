@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import Tooltip from 'react-bootstrap/Tooltip'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import { NavLink } from 'react-router-dom'
-import { FaHome, FaUserPlus, FaSignInAlt, FaSignOutAlt } from 'react-icons/fa'
+import { FaHome, FaUser, FaUserPlus, FaSignInAlt, FaSignOutAlt } from 'react-icons/fa'
 import styled from 'styled-components'
 import { auth } from '../Firebase'
 import { AuthContext } from '../services/Auth'
@@ -32,6 +32,14 @@ const NavUserLinks = () => {
   const { currentUser } = useContext(AuthContext)
   let userNav = currentUser ? (
     <NavUserAccess>
+      <OverlayTrigger
+        trigger="hover"
+        placement="bottom"
+        overlay={tooltipInsert("User")}>
+        <NavbarLink to="/user">
+          <FaUser />
+        </NavbarLink>
+      </OverlayTrigger>
       <OverlayTrigger
         trigger="hover"
         placement="bottom"
@@ -76,7 +84,7 @@ const NavUserLinks = () => {
         </NavbarLink>
       </OverlayTrigger>
     </NavUserAccess>
-  )
+  );
 
   return (
     <>
