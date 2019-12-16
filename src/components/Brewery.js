@@ -46,6 +46,7 @@ const Brewery = (props) => {
   const { currentUser } = useContext(AuthContext)
   console.log('Brewery', currentUser)
   const addBrewery = brewery => {
+    console.log('brews', brewery)
     db.doc(`users/${currentUser.uid}`)
       .update({ userBreweries: firestore.FieldValue.arrayUnion(brewery.id) })
   }

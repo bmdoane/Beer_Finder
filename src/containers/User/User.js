@@ -4,7 +4,8 @@ import db from '../../Firebase'
 import States from 'datasets-us-states-abbr-names'
 import { AuthContext } from '../../services/Auth'
 import { getBrewery } from '../../utils/api'
-import { MdPortrait } from "react-icons/md";
+import { MdPortrait } from 'react-icons/md'
+import LoadSpinner from '../../components/UI/Spinner'
 import styled from 'styled-components'
 
 const Container = styled.div`
@@ -114,6 +115,7 @@ class User extends Component {
       userName: '',
     },
     userBreweries: [],
+    isLoading: true,
   }
 
   componentDidMount() {
@@ -138,29 +140,35 @@ class User extends Component {
         }})
         return getUserBreweries(userBreweries)
       })
-      .then(breweries => this.setState({userBreweries: breweries}))
+      .then(breweries => this.setState({
+        userBreweries: breweries,
+        isLoading: false,
+      }))
       .catch(error => {
         console.log("Error getting document:", error)
       })
   }
 
   render() {
+    const { currentUser } = this.context;
     const { userBreweries } = this.state
     const { userName, memberSince } = this.state.user
-    return (
-      <Container>
+
+    let userProfile = (
+      <>
         <UserContainer>
-          <PortraitIcon />
-          <Bio>
-            <div>{userName}</div>
-            <div>Member since:</div>
-            <div>{memberSince}</div>
-          </Bio>
+            <PortraitIcon />
+            <Bio>
+              <div>{userName}</div>
+              <div>{currentUser.uid}</div>
+              <div>Member since:</div>
+              <div>{memberSince}</div>
+            </Bio>
         </UserContainer>
         <Headline>Favorite watering holes</Headline>
         <BreweryList>
           {userBreweries.map(brewery => {
-            const { name, city, state, id } = brewery
+            const { name, city, state, id } = brewery;
             return (
               <li key={id}>
                 <BreweryLink
@@ -173,12 +181,20 @@ class User extends Component {
                   {name} - {city}, {abbrState(state)}
                 </BreweryLink>
               </li>
-            )
+            );
           })}
         </BreweryList>
         <LinkWrapper>
           <HomeLink to="/">Find another brewery</HomeLink>
         </LinkWrapper>
+      </>
+    )
+    if (this.state.isLoading) {
+      userProfile = <LoadSpinner />
+    }
+    return (
+      <Container>
+        {userProfile}
       </Container>
     );
   }

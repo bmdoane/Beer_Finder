@@ -26,11 +26,12 @@ const HomeLink = styled(Link)`
 
 const UserBrewery = (props) => {
   const { brewery } = props.location.state;
+  console.log('UB', brewery)
   return (
     <Container>
       <h1>{brewery.name}</h1>
       <div>Text area for notes:</div>
-      <div>Beers tried text input:</div>
+      <div>Add a favorite beer:</div>
       <div>Be able to star rate beers</div>
       <div>Wishlist beers text input</div>
       <LinkWrapper>
