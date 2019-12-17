@@ -2,31 +2,11 @@ import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
-import GoogleMapsContainer from './Map'
-import styled from 'styled-components'
-import db from '../Firebase'
+import GoogleMapsContainer from '../Maps/Map'
+import { Container, BrewCard, GoogleWrapper, BtnWrapper } from './Brewery.styles'
+import db from '../../../Firebase'
 import { firestore } from 'firebase/app'
-import { AuthContext } from '../services/Auth'
-
-const Container = styled.div`
-  margin: 0 auto 40px;
-`
-
-const BrewCard = styled(Card)`
-  margin-top: 25px;
-  width: 320px;
-`
-
-const GoogleWrapper = styled.div`
-  width: 280px;
-  height: 280px;
-  margin: 0 auto;
-  text-align: center;
-`
-
-const BtnWrapper = styled.div`
-  padding-top: 20px;
-`
+import { AuthContext } from '../../../context/Auth'
 
 const phoneFormat = (num) => {
   num = num.replace(/[^\d]/g, "");

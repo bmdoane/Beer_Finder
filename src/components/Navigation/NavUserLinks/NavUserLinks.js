@@ -1,27 +1,10 @@
 import React, { useContext } from 'react'
 import Tooltip from 'react-bootstrap/Tooltip'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
-import { NavLink } from 'react-router-dom'
 import { FaHome, FaUser, FaUserPlus, FaSignInAlt, FaSignOutAlt } from 'react-icons/fa'
-import styled from 'styled-components'
-import { auth } from '../Firebase'
-import { AuthContext } from '../services/Auth'
-
-const NavbarLink = styled(NavLink)`
-  color: #ffffff;
-  font-size: 24px;
-  :hover {
-    color: #ccc;
-    text-decoration: none;
-  }
-`
-
-const NavUserAccess = styled.div`
-  justify-content: right;
-  a:not(:first-child) {
-    padding-left: 20px;
-  }
-`;
+import { NavbarLink, NavUserAccess } from './NavUserLinks.styles'
+import { auth } from '../../../Firebase'
+import { AuthContext } from '../../../context/Auth'
 
 const NavUserLinks = () => {
   const tooltipInsert = navLink => {

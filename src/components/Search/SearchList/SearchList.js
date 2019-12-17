@@ -1,37 +1,6 @@
 import React from 'react'
 import States from "datasets-us-states-abbr-names";
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
-
-const BreweryListContainer = styled.div`
-  max-width: 450px;
-  margin: 0 auto;
-  padding: 20px 0;
-`
-
-const BreweryList = styled.ul`
-  margin: 0 auto;
-  padding: 0 20px;
-
-  & li {
-    list-style-type: none;
-    padding: 3px 0;
-  }
-`
-
-const BreweryLink = styled(Link)`
-  color: #000;
-  font-weight: bold;
-
-  ::before {
-    content: '🍺 ';
-  }
-
-  &:hover {
-    color: red;
-    text-decoration: none;
-  }
-`
+import { BreweryListContainer, BreweryList, BreweryLink } from './SearchList.styles'
 
 const abbrState = brewState => {
   return Object.keys(States).find(key => States[key] === brewState)

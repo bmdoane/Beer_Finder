@@ -1,4 +1,7 @@
 import styled from 'styled-components'
+import { colors } from '../../../utils/styles/helper'
+
+const { bsDark } = colors
 
 export const Spinner = styled.div`
   font-size: 15px;
@@ -7,30 +10,30 @@ export const Spinner = styled.div`
   width: 11em;
   height: 11em;
   border-radius: 50%;
-  background: #343a40;
+  background: ${bsDark};
   background: -moz-linear-gradient(
     left,
-    #343a40 10%,
+    ${bsDark} 10%,
     rgba(255, 255, 255, 0) 42%
   );
   background: -webkit-linear-gradient(
     left,
-    #343a40 10%,
+    ${bsDark} 10%,
     rgba(255, 255, 255, 0) 42%
   );
   background: -o-linear-gradient(
     left,
-    #343a40 10%,
+    ${bsDark} 10%,
     rgba(255, 255, 255, 0) 42%
   );
   background: -ms-linear-gradient(
     left,
-    #343a40 10%,
+    ${bsDark} 10%,
     rgba(255, 255, 255, 0) 42%
   );
   background: linear-gradient(
     to right,
-    #343a40 10%,
+    ${bsDark} 10%,
     rgba(255, 255, 255, 0) 42%
   );
   position: relative;
@@ -43,7 +46,7 @@ export const Spinner = styled.div`
   :before {
     width: 50%;
     height: 50%;
-    background: #343a40;
+    background: ${bsDark};
     border-radius: 100% 0 0 0;
     position: absolute;
     top: 0;

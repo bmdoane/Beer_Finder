@@ -1,5 +1,5 @@
 import React from 'react'
-import { Spinner } from './styled'
+import { Spinner } from './Spinner.styles'
 
 
 const LoadSpinner = props => {

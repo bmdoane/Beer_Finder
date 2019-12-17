@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Navigation from '../components/Navigation'
+import Navigation from '../components/Navigation/Navigation/Navigation'
 import styled from 'styled-components'
 
 const MainContainer = styled.div`

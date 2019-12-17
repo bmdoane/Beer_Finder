@@ -1,13 +1,6 @@
 import React, { Component } from 'react'
-import { Map, GoogleApiWrapper, Marker } from 'google-maps-react'
-import styled from "styled-components";
-
-const GoogleMap = styled(Map)`
-  position: absolute;
-  width: 280px;
-  height: 280px;
-  text-align: center;
-`
+import { GoogleApiWrapper, Marker } from 'google-maps-react'
+import { GoogleMap } from './Map.styles'
 
 class GoogleMapsContainer extends Component {
   render() {
