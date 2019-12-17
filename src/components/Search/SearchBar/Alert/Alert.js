@@ -1,13 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
-
-const Container = styled.div`
-  width: 280px;
-  text-align: center;
-  `
-const Message = styled.p`
-  padding: 20px 0;
-`
+import { Container, Message } from './Alert.styles'
 
 const Alert = ({ alert }) => {
   const { addStatus, badStatus } = alert

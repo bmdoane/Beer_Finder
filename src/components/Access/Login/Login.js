@@ -1,20 +1,9 @@
 import React, { useCallback, useContext } from 'react'
 import { withRouter, Redirect } from 'react-router-dom'
-import styled from 'styled-components'
-import { auth } from '../Firebase'
-import { AuthContext } from '../services/Auth'
-import AccessForm from '../components/AccessForm'
-
-const Container = styled.div`
-  width: 280px;
-  margin: 0 auto;
-`
-
-const Headline = styled.h3`
-  text-align: center;
-  padding: 5px 0;
-  margin-bottom: 5px;
-`
+import { Container, Headline } from './Login.styles'
+import { auth } from '../../../Firebase'
+import { AuthContext } from '../../../context/Auth'
+import AccessForm from '../AccessForm/AccessForm'
 
 const Login = ({ history }) => {
   const handleLogin = useCallback(async event => {

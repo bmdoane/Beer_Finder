@@ -1,30 +1,7 @@
 import React from 'react'
-import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-import Alert from '../components/Alert'
-import styled from 'styled-components'
-
-const Container = styled.div`
-  width: 320px;
-  margin: 0 auto;
-  padding: 0 5px;
-`
-
-const Headline = styled.h3`
-  text-align: center;
-  padding: 10px 0;
-  margin: 10px 0 14px;
-`
-
-const FormLabel = styled(Form.Label)`
-  :not(:first-child) {
-    padding-top: 5px;
-  }
-`
-
-const FormButton = styled(Button)`
-  width: 100%;
-`
+import Alert from '../Alert/Alert'
+import { Container, Headline, FormLabel, FormButton } from './SearchBar.styles'
 
 const SearchBar = ({ handleTerms, handleSubmit, searchName, searchCity, searchState, searchMade, alert }) => {
   return (

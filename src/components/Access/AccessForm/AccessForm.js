@@ -1,21 +1,7 @@
 import React from 'react'
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import styled from "styled-components";
-
-const LoginForm = styled(Form)`
-  button:first-of-type {
-    margin-right: 10px;
-  }
-`;
-
-const FormLabel = styled(Form.Label)`
-  padding-left: 5px;
-
-  :not(:first-child) {
-    padding-top: 5px;
-  }
-`;
+import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
+import { LoginForm, FormLabel } from './AccessForm.styles'
 
 const AccessForm = props => {
   const { handleLogin, handleSignUp, isLoggingIn } = props
@@ -67,7 +53,7 @@ const AccessForm = props => {
         {formButton}
       </LoginForm>
     </>
-  );
+  )
 }
 
 export default AccessForm

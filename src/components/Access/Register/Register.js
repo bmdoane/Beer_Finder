@@ -1,19 +1,8 @@
 import React, { useCallback } from 'react'
 import { withRouter } from 'react-router-dom'
-import styled from 'styled-components'
-import db, { auth } from '../Firebase'
-import AccessForm from '../components/AccessForm'
-
-const Container = styled.div`
-  width: 280px;
-  margin: 0 auto;
-`
-
-const Headline = styled.h3`
-  text-align: center;
-  padding: 5px 0;
-  margin-bottom: 5px;
-`
+import db, { auth } from '../../../Firebase'
+import { Container, Headline } from './Register.styles'
+import AccessForm from '../AccessForm/AccessForm'
 
 const Register = ({ history }) => {
   const handleSignUp = useCallback(

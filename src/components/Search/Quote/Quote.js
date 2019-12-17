@@ -1,15 +1,8 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card'
-import styled from 'styled-components'
+import { QuoteCard } from './Quote.styles'
 
-const QuoteCard = styled(Card)`
-  margin: 0 40px 40px;
-  @media (max-width: 450px) {
-    margin: 0 20px 40px;
-  }
-`;
-
-const Quotes = (props) => {
+const Quote = (props) => {
   const { quote, scribe, title } = props.singleQuote
   return (
     <QuoteCard className="border-dark">
@@ -26,4 +19,4 @@ const Quotes = (props) => {
   );
 }
 
-export default Quotes
+export default Quote

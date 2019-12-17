@@ -1,16 +1,11 @@
 import React, { Component } from 'react'
 import States from 'datasets-us-states-abbr-names'
 import { getBrewery } from '../../utils/api'
-import SearchBar from '../../components/SearchBar'
-import SearchList from '../../components/SearchList'
-import Quotes from '../../components/Quotes'
-import styled from 'styled-components'
+import SearchBar from '../../components/Search/SearchBar/SearchBar/SearchBar'
+import SearchList from '../../components/Search/SearchList/SearchList'
+import Quote from '../../components/Search/Quote/Quote'
+import { Container } from './BeerFinder.styles'
 import beerQuotes from '../../data/quotes'
-
-const Container = styled.div`
-  margin: 0 auto;
-  background-color: #FFFFFF;
-`
 
 class BeerFinder extends Component {
   state = {
@@ -213,7 +208,7 @@ class BeerFinder extends Component {
           alert={alert}
         />
         <SearchList breweries={breweries} userId={userId} />
-        <Quotes singleQuote={singleQuote} />
+        <Quote singleQuote={singleQuote} />
       </Container>
     );
   }

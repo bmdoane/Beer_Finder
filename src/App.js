@@ -6,18 +6,20 @@ import {
 } from 'react-router-dom'
 import Layout from './hoc/Layout'
 import BeerFinder from './containers/BeerFinder/BeerFinder'
-import Brewery from './components/Brewery'
-import Login from './components/Login'
-import Register from './components/Register'
+import Brewery from './components/Brewery/Brewery/Brewery'
+import Login from './components/Access/Login/Login'
+import Register from './components/Access/Register/Register'
 import User from './containers/User/User'
-import UserBrewery from './components/UserBrewery'
-import { AuthProvider } from './services/Auth'
-import PrivateRoute from './components/PrivateRoute'
+import UserBreweries from './components/UserBreweries/UserBreweries'
+import { AuthProvider } from './context/Auth'
+import PrivateRoute from './components/PrivateRoute/PrivateRoute'
+import { GlobalStyle } from './utils/styles/global'
 
 class App extends Component {
   render() {
     return (
       <AuthProvider>
+        <GlobalStyle />
         <Router>
           <Layout>
             <Switch>
@@ -26,7 +28,7 @@ class App extends Component {
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
               <PrivateRoute path="/user" component={User} />
-              <PrivateRoute path="/userBrewery" component={UserBrewery} />
+              <PrivateRoute path="/userBreweries" component={UserBreweries} />
             </Switch>
           </Layout>
         </Router>
