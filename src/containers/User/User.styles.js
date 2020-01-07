@@ -18,7 +18,7 @@ export const UserContainer = styled.div`
     justify-content: center;
     width: 100%;
   }
-`;
+`
 
 export const Bio = styled.div`
   display: flex;
@@ -33,7 +33,7 @@ export const Bio = styled.div`
       margin-top: 0;
     }
   }
-`;
+`
 
 export const PortraitIcon = styled(MdPortrait)`
   color: ${bsDark};
@@ -41,12 +41,12 @@ export const PortraitIcon = styled(MdPortrait)`
   @media (max-width: 450px) {
     font-size: 108px;
   }
-`;
+`
 
 export const Headline = styled.h3`
   text-align: center;
   margin-bottom: 14px;
-`;
+`
 
 export const BreweryList = styled.ul`
   padding: 0 20px;
@@ -56,7 +56,7 @@ export const BreweryList = styled.ul`
     list-style-type: none;
     padding: 3px 0;
   }
-`;
+`
 
 export const BreweryLink = styled(Link)`
   color: #000;
@@ -70,13 +70,13 @@ export const BreweryLink = styled(Link)`
     color: red;
     text-decoration: none;
   }
-`;
+`
 
 export const LinkWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   margin-top: 14px;
-`;
+`
 
 export const HomeLink = styled(Link)`
   color: #000;
@@ -85,4 +85,4 @@ export const HomeLink = styled(Link)`
     font-weight: bold;
     text-decoration: none;
   }
-`;
+`

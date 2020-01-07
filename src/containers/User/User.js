@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import db from '../../Firebase'
-import States from 'datasets-us-states-abbr-names'
 import { AuthContext } from '../../context/Auth'
+import States from 'datasets-us-states-abbr-names'
 import { getBrewery } from '../../utils/api'
 import LoadSpinner from '../../components/UI/Spinner/Spinner'
 import { Container, UserContainer, Bio, PortraitIcon, Headline, BreweryLink, BreweryList, LinkWrapper, HomeLink } from './User.styles'
@@ -31,6 +31,7 @@ class User extends Component {
       userName: '',
     },
     userBreweries: [],
+    userId: null,
     isLoading: true,
   }
 
@@ -52,16 +53,42 @@ class User extends Component {
         console.log('data', data)
         this.setState({user: {
           memberSince: dateFormat(memberSince),
-          userName: userName,
+          userName,
         }})
         return getUserBreweries(userBreweries)
       })
-      .then(breweries => this.setState({
-        userBreweries: breweries,
+      .then(userBreweries => this.setState({
+        userBreweries,
+        userId: currentUser.uid,
         isLoading: false,
       }))
       .catch(error => {
         console.log("Error getting document:", error)
+      })
+  }
+
+  addNoteRef = (userId, breweryId) => {
+    db.doc(`breweries/${userId}`)
+      .get()
+      .then(doc => {
+        if (doc.exists) {
+          let breweryIds = Object.keys(doc.data())
+          let numArr = breweryIds.map(str => Number(str))
+          if (numArr.includes(breweryId)) {
+            return null
+          } else {
+            db.doc(`breweries/${userId}`)
+              .update({
+                [breweryId]: [],
+              })
+              console.log(`breweryNotes added for ${breweryId}`)
+          }
+        } else {
+          db.doc(`breweries/${userId}`)
+            .set({
+              [breweryId]: [],
+            })
+        }
       })
   }
 
@@ -84,20 +111,21 @@ class User extends Component {
         <Headline>Favorite watering holes</Headline>
         <BreweryList>
           {userBreweries.map(brewery => {
-            const { name, city, state, id } = brewery;
+            const { name, city, state, id } = brewery
             return (
               <li key={id}>
                 <BreweryLink
                   to={{
-                    pathname: "/userBreweries",
+                    pathname: `/userBreweries`,
                     state: {
                       brewery: brewery
                     }
-                  }}>
+                  }}
+                  onClick={() => this.addNoteRef(currentUser.uid, id)}>
                   {name} - {city}, {abbrState(state)}
                 </BreweryLink>
               </li>
-            );
+            )
           })}
         </BreweryList>
         <LinkWrapper>
@@ -112,7 +140,7 @@ class User extends Component {
       <Container>
         {userProfile}
       </Container>
-    );
+    )
   }
 }
 
