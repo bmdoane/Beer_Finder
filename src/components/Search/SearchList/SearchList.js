@@ -25,7 +25,7 @@ const SearchList = ({ breweries }) => {
                 {name} - {city}, {abbrState(state)}
               </BreweryLink>
             </li>
-          );
+          )
         })}
       </BreweryList>
     </BreweryListContainer>

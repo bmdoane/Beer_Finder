@@ -111,7 +111,7 @@ class User extends Component {
         <Headline>Favorite watering holes</Headline>
         <BreweryList>
           {userBreweries.map(brewery => {
-            const { name, city, state, id } = brewery;
+            const { name, city, state, id } = brewery
             return (
               <li key={id}>
                 <BreweryLink
@@ -125,7 +125,7 @@ class User extends Component {
                   {name} - {city}, {abbrState(state)}
                 </BreweryLink>
               </li>
-            );
+            )
           })}
         </BreweryList>
         <LinkWrapper>
