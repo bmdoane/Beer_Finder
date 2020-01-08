@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component, createRef } from 'react'
 import db from '../../Firebase'
 import { firestore } from 'firebase/app'
 import { AuthContext } from '../../context/Auth'
-import { Container, PageHeader, NoteList, AddBtn, BeerList, LinkWrapper, HomeLink } from './UserBreweries.styles'
+import { Container, BeerList, LinkWrapper, HomeLink } from './UserBreweries.styles'
 import LoadSpinner from '../../components/UI/Spinner/Spinner'
 import Notes from './Notes/Notes'
 
@@ -11,12 +11,15 @@ class UserBreweries extends Component {
 
   state = {
     isLoading: true,
+    isEditing: false,
+    editNote: '',
     note: '',
     notes: [],
     hasNotes: true,
     brewery: null,
     userId: null,
   }
+  inputRef = createRef()
 
   componentDidMount() {
     const { brewery } = this.props.location.state
@@ -34,12 +37,10 @@ class UserBreweries extends Component {
       })
       .then(breweryNotes => {
         if (breweryNotes === undefined || breweryNotes.length === 0) {
-          console.log('This brewery has no notes', breweryNotes)
           this.setState({
             hasNotes: false
           })
         } else {
-          console.log('Has breweryNotes', breweryNotes)
           this.setState({
             notes: breweryNotes,
           })
@@ -55,11 +56,41 @@ class UserBreweries extends Component {
     })
   }
 
-  postToFB = (note) => {
+  postNote = (note) => {
     const { userId, brewery } = this.state
     db.doc(`breweries/${userId}`)
       .update({
         [brewery.id]: firestore.FieldValue.arrayUnion(note)
+      })
+  }
+
+  deleteNote = (note, i) => {
+    let { notes, userId, brewery } = this.state
+    notes.splice(i, 1)
+    this.setState({
+      notes,
+    })
+    db.doc(`breweries/${userId}`)
+      .update({
+        [brewery.id]: firestore.FieldValue.arrayRemove(note)
+      })
+  }
+
+  setupEdit = (note) => {
+    console.log('setupEdit', note)
+    this.setState({
+      isEditing: true,
+      note,
+      editNote: note,
+    })
+    this.inputRef.current.focus()
+  }
+
+  editNotes = (updatedNotes) => {
+    let { userId, brewery } = this.state
+    db.doc(`breweries/${userId}`)
+      .update({
+        [brewery.id]: updatedNotes
       })
   }
 
@@ -73,7 +104,7 @@ class UserBreweries extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
     const { note } = this.state
-    this.postToFB(note)
+    this.postNote(note)
     this.setState(prevState => ({
       notes: [...prevState.notes, note],
       note: '',
@@ -81,11 +112,21 @@ class UserBreweries extends Component {
     }))
   }
 
+  handleEdit = (e) => {
+    e.preventDefault()
+    const { note, notes, editNote } = this.state
+    let otherNotes = notes.filter(el => el !== editNote)
+    let updatedNotes = [...otherNotes, note]
+    this.editNotes(updatedNotes)
+    this.setState({
+      notes: updatedNotes,
+      note: '',
+      isEditing: false,
+    })
+  }
+
   render() {
-    const { brewery, isLoading, note, notes, hasNotes } = this.state
-    console.log('this.state', this.state)
-    console.log('brew', brewery)
-    console.log('notes', notes)
+    const { brewery, isLoading, note, notes, hasNotes, isEditing } = this.state
 
     let headline = isLoading ? <LoadSpinner /> : <h1>{brewery.name}</h1>
 
@@ -93,11 +134,16 @@ class UserBreweries extends Component {
       <Container>
         {headline}
         <Notes
+          ref={this.inputRef}
           note={note}
           notes={notes}
           hasNotes={hasNotes}
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
+          deleteNote={this.deleteNote}
+          setupEdit={this.setupEdit}
+          isEditing={isEditing}
+          handleEdit={this.handleEdit}
         />
         <BeerList>
           Beers

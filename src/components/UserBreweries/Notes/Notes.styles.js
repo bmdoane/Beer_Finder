@@ -3,7 +3,7 @@ import { FaTrash, FaPencilAlt } from 'react-icons/fa'
 import styled from 'styled-components'
 import { colors } from '../../../utils/styles/helper'
 
-const { bfGray, bsDark } = colors
+const { bfGray, bsDark, linkHover } = colors
 
 export const NoteContainer = styled.div`
   display: flex;
@@ -15,14 +15,26 @@ export const NoteContainer = styled.div`
   }
 `
 
+export const IconContainer = styled.span`
+  width: 40px;
+  display: flex;
+  justify-content: space-between;
+`
+
 export const TrashIcon = styled(FaTrash)`
   color: ${bsDark};
   font-size: 14px;
+  :hover {
+    color: ${linkHover};
+  }
 `
 
 export const EditIcon = styled(FaPencilAlt)`
   color: ${bsDark};
   font-size: 14px;
+  :hover {
+    color: ${linkHover};
+  }
 `
 
 export const PageHeader = styled.h5`
@@ -39,7 +51,7 @@ export const NoteList = styled.div`
     padding: 3px 0;
   }
 `
-export const AddBtn = styled(Button)`
+export const Btn = styled(Button)`
   width: 150px;
 `
 
