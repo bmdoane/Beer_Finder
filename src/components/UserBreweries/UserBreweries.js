@@ -2,7 +2,8 @@ import React, { Component, createRef } from 'react'
 import db from '../../Firebase'
 import { firestore } from 'firebase/app'
 import { AuthContext } from '../../context/Auth'
-import { Container, BeerList, LinkWrapper, HomeLink } from './UserBreweries.styles'
+import { Container } from './UserBreweries.styles'
+import { LinkWrapper, HomeLink } from '../../utils/styles/global'
 import LoadSpinner from '../../components/UI/Spinner/Spinner'
 import Notes from './Notes/Notes'
 
@@ -145,12 +146,6 @@ class UserBreweries extends Component {
           isEditing={isEditing}
           handleEdit={this.handleEdit}
         />
-        <BeerList>
-          Beers
-          <div>Add a favorite beer:</div>
-          <div>Be able to star rate beers</div>
-          <div>Wishlist beers text input</div>
-        </BeerList>
         <LinkWrapper>
           <HomeLink to="/">Find another brewery</HomeLink>
         </LinkWrapper>

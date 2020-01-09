@@ -1,4 +1,5 @@
 import Button from 'react-bootstrap/Button'
+import Card from 'react-bootstrap/Card'
 import { FaTrash, FaPencilAlt } from 'react-icons/fa'
 import styled from 'styled-components'
 import { colors } from '../../../utils/styles/helper'
@@ -8,10 +9,19 @@ const { bfGray, bsDark, linkHover } = colors
 export const NoteContainer = styled.div`
   display: flex;
   flex-direction: column;
-  & li {
+`
+
+export const NoteCard = styled(Card)`
+  width: 100%;
+  margin-bottom: 5px;
+  border: solid 1px ${bfGray};
+  & .card-body {
+    padding: 5px;
+  }
+  & .card-footer {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: flex-end;
+    padding: 5px;
   }
 `
 
@@ -42,14 +52,7 @@ export const PageHeader = styled.h5`
 `
 
 export const NoteList = styled.div`
-  color: blue;
-  & ul {
-    padding: 0;
-  }
-  & li {
-    list-style-type: none;
-    padding: 3px 0;
-  }
+
 `
 export const Btn = styled(Button)`
   width: 150px;

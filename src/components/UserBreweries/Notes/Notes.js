@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react'
-import { NoteContainer, IconContainer, TrashIcon, EditIcon, NoteList, PageHeader, Btn, Label, TextArea } from './Notes.styles'
+import { NoteContainer, NoteCard, IconContainer, TrashIcon, EditIcon, NoteList, PageHeader, Btn, Label, TextArea } from './Notes.styles'
 
 const Notes = forwardRef((props, ref) => {
   const { note, notes, hasNotes, handleChange, handleSubmit, deleteNote, setupEdit, isEditing, handleEdit } = props
@@ -7,18 +7,24 @@ const Notes = forwardRef((props, ref) => {
   let noteList = (
     notes.map((note, i) => {
       return (
-        <li key={i}>
-          {note}
-          <IconContainer>
-            <TrashIcon onClick={() => deleteNote(note, i)} />
-            <EditIcon onClick={() => setupEdit(note)} />
-          </IconContainer>
-        </li>
+        <NoteCard key={i}>
+          <NoteCard.Body>
+            <NoteCard.Text>
+              {note}
+            </NoteCard.Text>
+          </NoteCard.Body>
+          <NoteCard.Footer>
+            <IconContainer>
+              <TrashIcon onClick={() => deleteNote(note, i)} />
+              <EditIcon onClick={() => setupEdit(note)} />
+            </IconContainer>
+          </NoteCard.Footer>
+        </NoteCard>
       )
     })
   )
 
-  let brewNotes = hasNotes ? <ul>{noteList}</ul> : <p>Please add notes</p>
+  let brewNotes = hasNotes ? <div>{noteList}</div> : <p>Please add notes</p>
 
   let inputLabel = !isEditing ? <Label>Add a note about this establishment:</Label> : <Label>Edit your poorly chosen words:</Label>
 
