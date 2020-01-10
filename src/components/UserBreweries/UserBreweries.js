@@ -1,4 +1,4 @@
-import React, { Component, createRef } from 'react'
+import React, { Component } from 'react'
 import db from '../../Firebase'
 import { firestore } from 'firebase/app'
 import { AuthContext } from '../../context/Auth'
@@ -12,6 +12,7 @@ class UserBreweries extends Component {
 
   state = {
     isLoading: true,
+    isAdding: false,
     isEditing: false,
     editNote: '',
     note: '',
@@ -20,7 +21,6 @@ class UserBreweries extends Component {
     brewery: null,
     userId: null,
   }
-  inputRef = createRef()
 
   componentDidMount() {
     const { brewery } = this.props.location.state
@@ -78,13 +78,12 @@ class UserBreweries extends Component {
   }
 
   setupEdit = (note) => {
-    console.log('setupEdit', note)
     this.setState({
+      isAdding: true,
       isEditing: true,
       note,
       editNote: note,
     })
-    this.inputRef.current.focus()
   }
 
   editNotes = (updatedNotes) => {
@@ -110,6 +109,7 @@ class UserBreweries extends Component {
       notes: [...prevState.notes, note],
       note: '',
       hasNotes: true,
+      isAdding: false,
     }))
   }
 
@@ -122,12 +122,25 @@ class UserBreweries extends Component {
     this.setState({
       notes: updatedNotes,
       note: '',
+      isAdding: false,
       isEditing: false,
     })
   }
 
+  showInput = () => {
+    this.setState({ isAdding: true })
+  }
+
+  hideInput = () => {
+    this.setState({
+      isAdding: false,
+      isEditing: false,
+      note: '',
+    })
+  }
+
   render() {
-    const { brewery, isLoading, note, notes, hasNotes, isEditing } = this.state
+    const { brewery, isLoading, note, notes, hasNotes, isEditing, isAdding } = this.state
 
     let headline = isLoading ? <LoadSpinner /> : <h1>{brewery.name}</h1>
 
@@ -135,7 +148,6 @@ class UserBreweries extends Component {
       <Container>
         {headline}
         <Notes
-          ref={this.inputRef}
           note={note}
           notes={notes}
           hasNotes={hasNotes}
@@ -145,6 +157,9 @@ class UserBreweries extends Component {
           setupEdit={this.setupEdit}
           isEditing={isEditing}
           handleEdit={this.handleEdit}
+          isAdding={isAdding}
+          showInput={this.showInput}
+          hideInput={this.hideInput}
         />
         <LinkWrapper>
           <HomeLink to="/">Find another brewery</HomeLink>

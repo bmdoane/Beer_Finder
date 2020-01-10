@@ -25,7 +25,6 @@ export const LinkWrapper = styled.div`
 
 export const HomeLink = styled(Link)`
   color: #000;
-  padding-right: 5px;
   &:hover {
     color: #000;
     font-weight: bold;
