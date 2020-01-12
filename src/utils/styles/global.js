@@ -1,4 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
+import { Link } from 'react-router-dom'
+import styled from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -13,4 +15,19 @@ export const GlobalStyle = createGlobalStyle`
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu, Cantarell, Helvetica Neue, sans-serif;
     font-size: 16px;
   }
-`;
+`
+
+export const LinkWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 14px;
+`
+
+export const HomeLink = styled(Link)`
+  color: #000;
+  &:hover {
+    color: #000;
+    font-weight: bold;
+    text-decoration: none;
+  }
+`

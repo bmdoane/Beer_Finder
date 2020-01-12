@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import db from '../../Firebase'
 import { firestore } from 'firebase/app'
 import { AuthContext } from '../../context/Auth'
-import { Container, PageHeader, NoteList, AddBtn, BeerList, LinkWrapper, HomeLink } from './UserBreweries.styles'
+import { Container } from './UserBreweries.styles'
+import { LinkWrapper, HomeLink } from '../../utils/styles/global'
 import LoadSpinner from '../../components/UI/Spinner/Spinner'
 import Notes from './Notes/Notes'
 
@@ -11,6 +12,9 @@ class UserBreweries extends Component {
 
   state = {
     isLoading: true,
+    isAdding: false,
+    isEditing: false,
+    editNote: '',
     note: '',
     notes: [],
     hasNotes: true,
@@ -34,12 +38,10 @@ class UserBreweries extends Component {
       })
       .then(breweryNotes => {
         if (breweryNotes === undefined || breweryNotes.length === 0) {
-          console.log('This brewery has no notes', breweryNotes)
           this.setState({
             hasNotes: false
           })
         } else {
-          console.log('Has breweryNotes', breweryNotes)
           this.setState({
             notes: breweryNotes,
           })
@@ -55,11 +57,40 @@ class UserBreweries extends Component {
     })
   }
 
-  postToFB = (note) => {
+  postNote = (note) => {
     const { userId, brewery } = this.state
     db.doc(`breweries/${userId}`)
       .update({
         [brewery.id]: firestore.FieldValue.arrayUnion(note)
+      })
+  }
+
+  deleteNote = (note, i) => {
+    let { notes, userId, brewery } = this.state
+    notes.splice(i, 1)
+    this.setState({
+      notes,
+    })
+    db.doc(`breweries/${userId}`)
+      .update({
+        [brewery.id]: firestore.FieldValue.arrayRemove(note)
+      })
+  }
+
+  setupEdit = (note) => {
+    this.setState({
+      isAdding: true,
+      isEditing: true,
+      note,
+      editNote: note,
+    })
+  }
+
+  editNotes = (updatedNotes) => {
+    let { userId, brewery } = this.state
+    db.doc(`breweries/${userId}`)
+      .update({
+        [brewery.id]: updatedNotes
       })
   }
 
@@ -73,19 +104,43 @@ class UserBreweries extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
     const { note } = this.state
-    this.postToFB(note)
+    this.postNote(note)
     this.setState(prevState => ({
       notes: [...prevState.notes, note],
       note: '',
       hasNotes: true,
+      isAdding: false,
     }))
   }
 
+  handleEdit = (e) => {
+    e.preventDefault()
+    const { note, notes, editNote } = this.state
+    let otherNotes = notes.filter(el => el !== editNote)
+    let updatedNotes = [...otherNotes, note]
+    this.editNotes(updatedNotes)
+    this.setState({
+      notes: updatedNotes,
+      note: '',
+      isAdding: false,
+      isEditing: false,
+    })
+  }
+
+  showInput = () => {
+    this.setState({ isAdding: true })
+  }
+
+  hideInput = () => {
+    this.setState({
+      isAdding: false,
+      isEditing: false,
+      note: '',
+    })
+  }
+
   render() {
-    const { brewery, isLoading, note, notes, hasNotes } = this.state
-    console.log('this.state', this.state)
-    console.log('brew', brewery)
-    console.log('notes', notes)
+    const { brewery, isLoading, note, notes, hasNotes, isEditing, isAdding } = this.state
 
     let headline = isLoading ? <LoadSpinner /> : <h1>{brewery.name}</h1>
 
@@ -98,13 +153,14 @@ class UserBreweries extends Component {
           hasNotes={hasNotes}
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
+          deleteNote={this.deleteNote}
+          setupEdit={this.setupEdit}
+          isEditing={isEditing}
+          handleEdit={this.handleEdit}
+          isAdding={isAdding}
+          showInput={this.showInput}
+          hideInput={this.hideInput}
         />
-        <BeerList>
-          Beers
-          <div>Add a favorite beer:</div>
-          <div>Be able to star rate beers</div>
-          <div>Wishlist beers text input</div>
-        </BeerList>
         <LinkWrapper>
           <HomeLink to="/">Find another brewery</HomeLink>
         </LinkWrapper>

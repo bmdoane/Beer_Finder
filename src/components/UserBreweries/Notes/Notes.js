@@ -1,41 +1,55 @@
 import React from 'react'
-import { NoteContainer, TrashIcon, EditIcon, NoteList, PageHeader, AddBtn, Label, TextArea } from './Notes.styles'
+import { addToolTip } from '../../../utils/helper'
+import { NoteContainer, PlusIcon, MinusIcon, NoteCard, IconContainer, TrashIcon, EditIcon, NoteList, PageHeader } from './Notes.styles'
+import AddEdit from './AddEdit/AddEdit'
 
 const Notes = (props) => {
-  const { note, notes, hasNotes, handleChange, handleSubmit } = props
+  const { note, notes, hasNotes, handleChange, handleSubmit, deleteNote, setupEdit, isEditing, handleEdit, isAdding, showInput, hideInput } = props
 
   let noteList = (
     notes.map((note, i) => {
       return (
-        <li key={i}>
-          {note} <TrashIcon />
-        </li>
+        <NoteCard key={i}>
+          <NoteCard.Body>
+            <NoteCard.Text>
+              {note}
+            </NoteCard.Text>
+          </NoteCard.Body>
+          <NoteCard.Footer>
+            <IconContainer>
+              {addToolTip("Trash", <TrashIcon onClick={() => deleteNote(note, i)} />)}
+              {addToolTip("Edit", <EditIcon onClick={() => setupEdit(note)} />)}
+            </IconContainer>
+          </NoteCard.Footer>
+        </NoteCard>
       )
     })
   )
 
-  let brewNotes = hasNotes ?
-    <ul>{noteList}</ul>
-    : <p>Please add notes</p>
+  let inputStatus = !isAdding ?
+    <>
+      {addToolTip("Add note", <PlusIcon onClick = {() => showInput()} />)}
+    </> :
+    <>
+      {addToolTip("Bail on note", <MinusIcon onClick={() => hideInput()} />)}
+    </>
+
+  let brewNotes = hasNotes ? <div>{noteList}</div> : <p>Please add notes</p>
 
   return (
     <NoteList>
       <NoteContainer>
+        {inputStatus}
+        {isAdding &&
+        <AddEdit
+          note={note}
+          isEditing={isEditing}
+          handleChange={handleChange}
+          handleEdit={handleEdit}
+          handleSubmit={handleSubmit}
+        />}
         <PageHeader>Observations:</PageHeader>
         {brewNotes}
-        <Label>Add a note about this establishment:</Label>
-        <TextArea
-          rows="5"
-          name="note"
-          placeholder="The beer here is..."
-          onChange={e => handleChange(e)}
-          value={note}
-        />
-        <AddBtn
-          variant="secondary"
-          type="button"
-          onClick={e => handleSubmit(e)}
-        >Add Note</AddBtn>
       </NoteContainer>
     </NoteList>
   )

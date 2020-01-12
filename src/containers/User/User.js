@@ -4,7 +4,8 @@ import { AuthContext } from '../../context/Auth'
 import States from 'datasets-us-states-abbr-names'
 import { getBrewery } from '../../utils/api'
 import LoadSpinner from '../../components/UI/Spinner/Spinner'
-import { Container, UserContainer, Bio, PortraitIcon, Headline, BreweryLink, BreweryList, LinkWrapper, HomeLink } from './User.styles'
+import { Container, UserContainer, Bio, PortraitIcon, Headline, BreweryLink, BreweryList } from './User.styles'
+import { LinkWrapper, HomeLink } from '../../utils/styles/global'
 
 const abbrState = brewState => {
   return Object.keys(States).find(key => States[key] === brewState)

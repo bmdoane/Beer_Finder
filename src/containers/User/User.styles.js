@@ -71,18 +71,3 @@ export const BreweryLink = styled(Link)`
     text-decoration: none;
   }
 `
-
-export const LinkWrapper = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 14px;
-`
-
-export const HomeLink = styled(Link)`
-  color: #000;
-  &:hover {
-    color: #000;
-    font-weight: bold;
-    text-decoration: none;
-  }
-`

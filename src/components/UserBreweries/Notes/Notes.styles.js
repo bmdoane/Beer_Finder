@@ -1,28 +1,67 @@
-import Button from 'react-bootstrap/Button'
-import { FaTrash, FaPencilAlt } from 'react-icons/fa'
+import Card from 'react-bootstrap/Card'
+import { FaTrash, FaPencilAlt, FaPlus, FaMinus } from 'react-icons/fa'
 import styled from 'styled-components'
 import { colors } from '../../../utils/styles/helper'
 
-const { bfGray, bsDark } = colors
+const { bfGray, bsDark, linkHover } = colors
 
 export const NoteContainer = styled.div`
   display: flex;
   flex-direction: column;
-  & li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+`
+
+export const PlusIcon = styled(FaPlus)`
+  color: ${bsDark};
+  font-size: 14px;
+  align-self: flex-end;
+  :hover {
+    color: ${linkHover};
   }
+`
+
+export const MinusIcon = styled(FaMinus)`
+  color: ${bsDark};
+  font-size: 14px;
+  align-self: flex-end;
+  :hover {
+    color: ${linkHover};
+  }
+`
+
+export const NoteCard = styled(Card)`
+  width: 100%;
+  margin-bottom: 5px;
+  border: solid 1px ${bfGray};
+  & .card-body {
+    padding: 5px;
+  }
+  & .card-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 5px;
+  }
+`
+
+export const IconContainer = styled.span`
+  width: 40px;
+  display: flex;
+  justify-content: space-between;
 `
 
 export const TrashIcon = styled(FaTrash)`
   color: ${bsDark};
   font-size: 14px;
+  :hover {
+    color: ${linkHover};
+  }
 `
 
 export const EditIcon = styled(FaPencilAlt)`
   color: ${bsDark};
   font-size: 14px;
+  :hover {
+    color: ${linkHover};
+  }
 `
 
 export const PageHeader = styled.h5`
@@ -30,28 +69,4 @@ export const PageHeader = styled.h5`
 `
 
 export const NoteList = styled.div`
-  color: blue;
-  & ul {
-    padding: 0;
-  }
-  & li {
-    list-style-type: none;
-    padding: 3px 0;
-  }
-`
-export const AddBtn = styled(Button)`
-  width: 150px;
-`
-
-export const Label = styled.label`
-  display: block;
-  font-weight: bold;
-`
-
-export const TextArea = styled.textarea`
-  width: 100%;
-  border: solid 1px ${bfGray};
-  border-radius: 3px;
-  padding-left: 5px;
-  margin-bottom: 15px;
 `
