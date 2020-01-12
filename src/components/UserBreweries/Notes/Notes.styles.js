@@ -69,5 +69,4 @@ export const PageHeader = styled.h5`
 `
 
 export const NoteList = styled.div`
-
 `

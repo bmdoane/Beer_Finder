@@ -1,4 +1,5 @@
 import React from 'react'
+import { addToolTip } from '../../../utils/helper'
 import { NoteContainer, PlusIcon, MinusIcon, NoteCard, IconContainer, TrashIcon, EditIcon, NoteList, PageHeader } from './Notes.styles'
 import AddEdit from './AddEdit/AddEdit'
 
@@ -16,8 +17,8 @@ const Notes = (props) => {
           </NoteCard.Body>
           <NoteCard.Footer>
             <IconContainer>
-              <TrashIcon onClick={() => deleteNote(note, i)} />
-              <EditIcon onClick={() => setupEdit(note)} />
+              {addToolTip("Trash", <TrashIcon onClick={() => deleteNote(note, i)} />)}
+              {addToolTip("Edit", <EditIcon onClick={() => setupEdit(note)} />)}
             </IconContainer>
           </NoteCard.Footer>
         </NoteCard>
@@ -26,8 +27,12 @@ const Notes = (props) => {
   )
 
   let inputStatus = !isAdding ?
-    <PlusIcon onClick={() => showInput()} /> :
-    <MinusIcon onClick={() => hideInput()} />
+    <>
+      {addToolTip("Add note", <PlusIcon onClick = {() => showInput()} />)}
+    </> :
+    <>
+      {addToolTip("Bail on note", <MinusIcon onClick={() => hideInput()} />)}
+    </>
 
   let brewNotes = hasNotes ? <div>{noteList}</div> : <p>Please add notes</p>
 

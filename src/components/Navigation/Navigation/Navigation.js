@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from 'react-bootstrap/Navbar'
-import useWindowSize from '../../../utils/windowSize'
+import { useWindowSize } from '../../../utils/helper'
 import NavUserLinks from '../NavUserLinks/NavUserLinks'
 import { NavContainer, NavbarLink } from './Navigation.styles'
 
